@@ -51,10 +51,11 @@
       @RenderBody()
     </section>
   </div>
-  <div style="background-color: #F2DD72; margin: 0 8px 8px;">
-    <div style="text-align: center;">&copy;ShopVote @DateTime.UtcNow.Year</div>
+  <div style="background-color: #EFEFEF;">
+    <div style="background-color: #F2DD72; margin: 8px auto; margin-top: 0; max-width: 960px;">
+      <div style="text-align: center; line-height: 24px; vertical-align: middle; font-size: 16px;">&copy;ShopVote @DateTime.UtcNow.Year</div>
+    </div>
   </div>
-
 
   @Scripts.Render("~/bundles/jquery")
   @RenderSection("scripts", required: false)
