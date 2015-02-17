@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ShopVote.US - @ViewBag.Title</title>
+  <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <meta name="viewport" content="width=device-width" />
+  @Styles.Render("~/Content/css")
+  <style>
+    .menu-bar {
+      background-color: #BDF5BD;
+      width: 100%;
+      margin: 0 auto;
+      position: fixed;
+    }
+
+      .menu-bar > div {
+        display: inline-block;
+      }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="menu-bar">
+      <a href="@Url.Action("index", "home")" style="background-color: #BDF5BD;">
+        <div class="float-left">
+          <div class="site-title">
+            <img height="75" width="93" src="@Url.Content("~/Images/shopvote_logo.png")" alt="ShopVote" />
+          </div>
+        </div>
+        <div style="float: left; line-height: 75px; vertical-align: middle; margin-left: 8px; font-size: 32px;">
+          ShopVote.US
+        </div>
+      </a>
+      <div style="float: right; margin-top: 8px;">
+        <section id="login">
+          @Html.Partial("_LoginPartial")
+        </section>
+        <nav>
+          <ul id="menu">
+            <li>@Html.ActionLink("about", "about", "home")</li>
+            <li>@Html.ActionLink("contact us", "contact", "home")</li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <div id="body" style="min-height: 750px; padding-top: 86px;">
+    @RenderSection("featured", required: false)
+    <section class="content-wrapper main-content clear-fix">
+      @RenderBody()
+    </section>
+  </div>
+  <div style="background-color: #F2DD72; margin: 0 8px 8px;">
+    <div style="text-align: center;">&copy;ShopVote @DateTime.UtcNow.Year</div>
+  </div>
+
+
+  @Scripts.Render("~/bundles/jquery")
+  @RenderSection("scripts", required: false)
+</body>
+</html>
