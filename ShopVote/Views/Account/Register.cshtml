@@ -20,12 +20,37 @@
                 @Html.TextBoxFor(m => m.UserName)
             </li>
             <li>
+                @Html.LabelFor(m =>m.ConfirmUserName)
+                @Html.TextBoxFor(m=>m.ConfirmUserName)
+            </li>
+            <li>
                 @Html.LabelFor(m => m.Password)
                 @Html.PasswordFor(m => m.Password)
             </li>
             <li>
                 @Html.LabelFor(m => m.ConfirmPassword)
                 @Html.PasswordFor(m => m.ConfirmPassword)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.StreetAddress1)
+                @Html.TextBoxFor(m => m.StreetAddress1)
+            </li>
+           
+            <li>
+                @Html.LabelFor(m => m.StreetAddress2)
+                @Html.TextBoxFor(m=>m.StreetAddress2)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.City)
+                @Html.TextBoxFor(m=>m.City)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.State)
+                @Html.TextBoxFor(m=>m.State)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Zip)
+                @Html.TextBoxFor(m=>m.Zip)
             </li>
         </ol>
         <input type="submit" value="Register" />

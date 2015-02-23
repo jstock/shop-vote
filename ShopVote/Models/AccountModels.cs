@@ -77,6 +77,11 @@ namespace ShopVote.Models
     public string UserName { get; set; }
 
     [Required]
+    [Display(Name = "Confirm User name")]
+    [Compare("UserName", ErrorMessage="The username and confirmation username do not match.")]
+    public string ConfirmUserName { get; set; }
+
+    [Required]
     [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
     [DataType(DataType.Password)]
     [Display(Name = "Password")]
@@ -86,6 +91,35 @@ namespace ShopVote.Models
     [Display(Name = "Confirm password")]
     [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
     public string ConfirmPassword { get; set; }
+
+    [Required]
+    [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
+    [DataType(DataType.Text)]
+    [Display(Name = "Street Adress 1")]
+    public string StreetAddress1 { get; set; }
+
+
+    [DataType(DataType.Text)]
+    [Display(Name = "Street Adress 2")]
+    public string StreetAddress2 { get; set; }
+
+    [Required]
+    [DataType(DataType.Text)]
+    [Display(Name = "City")]
+    public string City { get; set; }
+
+    [Required]
+    [DataType(DataType.Text)]
+    [Display(Name = "State")]
+    public string State { get; set; }
+
+    [Required]
+    [DataType(DataType.PostalCode)]
+    [Display(Name = "Zip")]
+    public string Zip { get; set; }
+
+ 
+
   }
 
   public class ExternalLogin
