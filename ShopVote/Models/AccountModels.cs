@@ -77,7 +77,7 @@ namespace ShopVote.Models
     public string UserName { get; set; }
 
     [Required]
-    [Display(Name = "Confirm User name")]
+    [Display(Name = "Confirm user name")]
     [Compare("UserName", ErrorMessage="The username and confirmation username do not match.")]
     public string ConfirmUserName { get; set; }
 
@@ -95,12 +95,12 @@ namespace ShopVote.Models
     [Required]
     [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
     [DataType(DataType.Text)]
-    [Display(Name = "Street Adress 1")]
+    [Display(Name = "Street Address 1")]
     public string StreetAddress1 { get; set; }
 
 
     [DataType(DataType.Text)]
-    [Display(Name = "Street Adress 2")]
+    [Display(Name = "Street Address 2")]
     public string StreetAddress2 { get; set; }
 
     [Required]
