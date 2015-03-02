@@ -4,31 +4,58 @@
   <meta charset="utf-8" />
   <title>ShopVote.US - @ViewBag.Title</title>
   <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link href='http://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
   <meta name="viewport" content="width=device-width" />
   @Styles.Render("~/Content/css")
   <style>
     .menu-bar {
-      background-color: #BBEEFF;
+      background-color: #A2D7D8;
       width: 100%;
       margin: 0 auto;
       position: fixed;
+      box-shadow: 0 0 8px;
     }
 
       .menu-bar > div {
         display: inline-block;
       }
+
+    .menu-bar > a:hover {
+      color: #192823;
+    }
+
+    .footer {
+      background-color: #EDEDEA;
+      margin-top: 16px;
+    }
+
+      .footer > div {
+        background-color: #FCD059; 
+        margin: 8px auto; 
+        max-width: 960px;
+      }
+
+        .footer > div > div {
+          text-align: center; 
+          line-height: 24px; 
+          vertical-align: middle; 
+          font-size: 16px;
+        }
+
   </style>
 </head>
 <body>
   <header>
     <div class="menu-bar">
-      <a href="@Url.Action("index", "home")" style="background-color: #BBEEFF;">
+      <a href="@Url.Action("index", "home")" style="background-color: #A2D7D8;">
         <div class="float-left">
           <div class="site-title">
-            <img height="75" width="93" src="@Url.Content("~/Images/shopvote_logo.png")" alt="ShopVote" />
+            <img height="64" width="64" src="@Url.Content("~/Images/logo_2.png")" alt="ShopVote"
+              style="margin-top: 5px; margin-left: 8px;" />
           </div>
         </div>
-        <div style="float: left; line-height: 75px; vertical-align: middle; margin-left: 8px; font-size: 32px;">
+        <div class="title" style="float: left; line-height: 75px; vertical-align: middle; margin-left: 8px; font-size: 28px;
+          font-family: Satisfy, cursive;">
           ShopVote.US
         </div>
       </a>
@@ -38,25 +65,38 @@
         </section>
         <nav>
           <ul id="menu">
-            <li>@Html.ActionLink("about", "about", "home")</li>
-            <li>@Html.ActionLink("contact us", "contact", "home")</li>
+            <li style="font-size: 12px;">@Html.ActionLink("about", "about", "home")</li>
+            <li style="font-size: 12px;">@Html.ActionLink("contact us", "contact", "home")</li>
           </ul>
         </nav>
       </div>
     </div>
   </header>
   <div id="body" style="min-height: 750px; padding-top: 86px;">
-    @RenderSection("featured", required: false)
-    <section class="content-wrapper main-content clear-fix">
-      @RenderBody()
-    </section>
+    @if (Request.IsAuthenticated) {
+        <div style="background-color: #BFE1BF; position: fixed; margin-top: 16px; left: 0px; width: 175px; height: 550px; 
+          border-top-right-radius: 8px; border-bottom-right-radius: 8px;"></div>
+        <div style="margin-left: 190px;">
+          <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+          </section>
+          <div class="footer">
+            <div>
+              <div>&copy;ShopVote @DateTime.UtcNow.Year</div>
+            </div>
+          </div>
+        </div>
+    } else {
+        <section class="content-wrapper main-content clear-fix">
+          @RenderBody()
+        </section>
+        <div class="footer">
+          <div>
+            <div>&copy;ShopVote @DateTime.UtcNow.Year</div>
+          </div>
+        </div>
+    }
   </div>
-  <div style="background-color: #EFEFEF;">
-    <div style="background-color: #FFF888; margin: 8px auto; margin-top: 0; max-width: 960px;">
-      <div style="text-align: center; line-height: 24px; vertical-align: middle; font-size: 16px;">&copy;ShopVote @DateTime.UtcNow.Year</div>
-    </div>
-  </div>
-
   @Scripts.Render("~/bundles/jquery")
   @RenderSection("scripts", required: false)
 </body>
