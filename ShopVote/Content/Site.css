@@ -28,7 +28,7 @@ a {
     }
 
     a:hover {
-        color: #999;
+        color: #EDEDEA;
     }
 
 header, footer, hgroup,
@@ -54,7 +54,7 @@ nav, section {
 
 h1, h2, h3,
 h4, h5, h6 {
-    color: #000;
+    color: #192823;
     margin-bottom: 0;
     padding-bottom: 0;
 }
@@ -186,7 +186,7 @@ ul#menu {
         }
 
         ul#menu li a:hover {
-            color: #999;
+            color: #EDEDEA;
             text-decoration: none;
         }
 
@@ -349,7 +349,7 @@ aside {
 }
 
 .contact iframe {
-    border: 1px solid #333;
+    border: 1px solid #192823;
     margin: 5px 0 0 10px;
 }
 
@@ -384,8 +384,8 @@ label.checkbox {
 }
 
 input, textarea {
-    border: 1px solid #e2e2e2;
-    background: #fff;
+    border: 1px solid #EDEDEA;
+    background: #FFF;
     color: #192823;
     font-size: 1.2em;
     margin: 5px 0 6px 0;
@@ -513,7 +513,7 @@ th {
     }
 
     th a:hover {
-        color: #999;
+        color: #EDEDEA;
     }
 
     th.asc a, th.desc a {
@@ -584,7 +584,7 @@ tr.pager td {
         }
 
         #login a:hover {
-            color: #999;
+            color: #EDEDEA;
         }
 
     /* menu */
