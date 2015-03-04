@@ -18,15 +18,17 @@ namespace ShopVote
       //    clientId: "",
       //    clientSecret: "");
 
-      //OAuthWebSecurity.RegisterTwitterClient(
-      //    consumerKey: "",
-      //    consumerSecret: "");
+      OAuthWebSecurity.RegisterTwitterClient(
+          consumerKey: "7op4AFOp5w1na6ZGvdOrxIuYZ",
+         consumerSecret: "0Lg9BYjJykZ3XbMiXCAq9qkdICcNtsS5JIvigyHqJejiWqeBLf");
 
-      //OAuthWebSecurity.RegisterFacebookClient(
-      //    appId: "",
-      //    appSecret: "");
-
-      //OAuthWebSecurity.RegisterGoogleClient();
+      OAuthWebSecurity.RegisterFacebookClient(
+          appId: "1600290690205054",
+          appSecret: "89322c6f46e905708d6f85a9db188a06");
+        /*
+              OAuthWebSecurity.RegisterGoogleClient(
+                 clientId: "000-000.apps.googleusercontent.com",
+                 clientSecret: "00000000000");*/
     }
   }
 }
