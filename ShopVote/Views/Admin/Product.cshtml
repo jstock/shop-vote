@@ -1,8 +1,63 @@
 ﻿@{
-    ViewBag.Title = "Products";
+    ViewBag.Title = "Product";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">@ViewBag.Title</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Product Name 1</td>
+                    <td>Product Description</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Product Name 2</td>
+                    <td>Product Description</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Product Name 3</td>
+                    <td>Product Description</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Product Name 4</td>
+                    <td>Product Description</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Product Name 5</td>
+                    <td>Product Description</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Product Name 6</td>
+                    <td>Product Description</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Product Name 7</td>
+                    <td>Product Description</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+            <div class="form-group">
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-primary">Add New</button>
+            </div>
+        </div>
 </div>
