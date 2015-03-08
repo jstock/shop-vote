@@ -1,0 +1,102 @@
+﻿@model ShopVote.Models.FilterProfilesModel
+@{
+    ViewBag.Title = "Question";
+}
+<hgroup>
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<div style="font-size:35px; background-color:#00ff21 ;width:20px;margin:0 auto;">
+    <p>
+        <h2>Welcome to the Question Page</h2>
+        <div style="text-align:right">
+            @Html.ActionLink("Logout","LogOff","Account")
+        </div>
+    </p>
+</div> 
+<div style="width:160px; background-color:#0ff;top:100px;bottom:0px;position:fixed;padding:20px;">
+
+    <ul>
+        <li>@Html.ActionLink("Home","Index","Home")</li>
+        <li>@Html.ActionLink("Contact","Contact","Home")</li>
+        <li>@Html.ActionLink("Contact","Contact","Home")</li>
+    </ul>
+</div>
+<div style="background-color:#fff;left:200px;right:0px;top:100px;bottom:0px;position:absolute;padding-left:50px;padding-top:50px;">
+   @using(Html.BeginForm()){
+     <section>
+        <header><h2>Animal Treatment</h2></header>
+        <p>
+           <font size="6">Are you against tests on animals?</font>
+            <br>@Html.RadioButton() yes
+            <br> @Html.RadioButton() Neutral
+            <br>@Html.RadioButton() no
+            <br/><font size"6">Are you against usage of fur?</font>
+            <br>@Html.RadioButton() yes
+            <br> @Html.RadioButton() Neutral
+            <br>@Html.RadioButton() no
+                 
+        </p>
+    </section>
+    <section>
+        <header><h2>Envionment</h2></header>
+        <p>
+           <font size="6">do you support anti climate change measures?</font>
+           <br>@Html.RadioButton() yes
+            <br> @Html.RadioButton() Neutral
+            <br>@Html.RadioButton() no
+            <br><font size"6">Do you support EpEAT score?</font>
+            <br>@Html.RadioButton() yes
+            <br> @Html.RadioButton() Neutral
+            <br>@Html.RadioButton() no
+                 
+        </p>
+    </section>
+    <section>
+        <header><h2>LGBT</h2></header>
+        <p>
+           <font size="6">Do you support transgender health care coverage plan?</font>
+           <<br>@Html.RadioButton() yes
+            <br> @Html.RadioButton() Neutral
+            <br>@Html.RadioButton() no
+            <br><font size"6">Do you support workplace fairness?</font>
+            <br>@Html.RadioButton() yes
+            <br> @Html.RadioButton() Neutral
+            <br>@Html.RadioButton() no
+                 
+        </p>
+    </section>
+    <section>
+        <header><h2>Human Rights</h2></header>
+        <p>
+           <font size="6">Do you support fair trade?</font>
+           <br>@Html.RadioButton() yes
+            <br> @Html.RadioButton() Neutral
+            <br>@Html.RadioButton() no
+            <br><font size"6">Do you support BDS movement against Isreal?</font>
+            <br>@Html.RadioButton() yes
+            <br> @Html.RadioButton() Neutral
+            <br>@Html.RadioButton() no
+        </p>
+    </section>
+    <section>
+        <header><h2>Political Contribution</h2></header>
+        <p>
+           <font size="6">Which political party do you support?</font>
+           <br>@Html.RadioButton() yes
+           <br> @Html.RadioButton() Neutral
+           <br>@Html.RadioButton() no     
+        </p>
+    </section>
+    <section>
+        <header><h2>Football</h2></header>
+        <p>
+           <font size="6">Are you against that team up north?</font>
+           <br>@Html.RadioButton() yes
+           <br> @Html.RadioButton() Neutral
+           <br>@Html.RadioButton() no    
+        </p>
+    </section>
+    <input type="submit" value="Submit" />
+   }
+</div>
