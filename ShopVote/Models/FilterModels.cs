@@ -31,7 +31,8 @@ namespace ShopVote.Models
     [ForeignKey("Manufacturer")]
     public int ManufacturerId { get; set; }
 
-    // TODO: Add Foreign Key to product after model has been created
+    [ForeignKey("Product")]
+    public int? ProductId { get; set; }
 
     public string Name { get; set; }
     public Object Value { get; set; }
