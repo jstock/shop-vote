@@ -42,6 +42,28 @@
           font-size: 16px;
         }
 
+    div.title {
+      float: left; 
+      line-height: 75px; 
+      vertical-align: middle; 
+      margin-left: 8px; 
+      font-size: 28px;
+      font-family: Satisfy, cursive;
+    }
+
+    .nav-menu {
+      background-color: #BFE1BF; 
+      position: fixed; 
+      margin-top: 16px; 
+      left: 0px; 
+      width: 175px; 
+      height: 550px; 
+      border-top-right-radius: 8px;
+      -moz-border-radius-topright: 8px;
+      border-bottom-right-radius: 8px;
+      -moz-border-radius-bottomright: 8px;
+    }
+
   </style>
 </head>
 <body>
@@ -54,8 +76,7 @@
               style="margin-top: 5px; margin-left: 8px;" />
           </div>
         </div>
-        <div class="title" style="float: left; line-height: 75px; vertical-align: middle; margin-left: 8px; font-size: 28px;
-          font-family: Satisfy, cursive;">
+        <div class="title">
           ShopVote.US
         </div>
       </a>
@@ -74,19 +95,10 @@
   </header>
   <div id="body" style="min-height: 750px; padding-top: 86px;">
     @if (Request.IsAuthenticated) {
-        <div style="background-color: #BFE1BF; position: fixed; margin-top: 16px; left: 0px; width: 175px; height: 550px; 
-          border-top-right-radius: 8px; border-bottom-right-radius: 8px;"></div>
-        <div style="margin-left: 190px;">
-          <section class="content-wrapper main-content clear-fix">
-            @RenderBody()
-          </section>
-          <div class="footer">
-            <div>
-              <div>&copy;ShopVote @DateTime.UtcNow.Year</div>
-            </div>
-          </div>
-        </div>
-    } else {
+      <div class="nav-menu">
+
+      </div>
+      <div style="margin-left: 190px; margin-right: 16px;">
         <section class="content-wrapper main-content clear-fix">
           @RenderBody()
         </section>
@@ -95,6 +107,16 @@
             <div>&copy;ShopVote @DateTime.UtcNow.Year</div>
           </div>
         </div>
+      </div>
+    } else {
+      <section class="content-wrapper main-content clear-fix">
+        @RenderBody()
+      </section>
+      <div class="footer">
+        <div>
+          <div>&copy;ShopVote @DateTime.UtcNow.Year</div>
+        </div>
+      </div>
     }
   </div>
   @Scripts.Render("~/bundles/jquery")
