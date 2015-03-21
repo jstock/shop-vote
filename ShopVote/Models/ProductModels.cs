@@ -11,7 +11,7 @@ namespace ShopVote.Models
     public class ProductContext : DbContext
     {
         public ProductContext()
-            : base("DefaultConncetion")
+            : base("DefaultConnection")
         {
         }
 
