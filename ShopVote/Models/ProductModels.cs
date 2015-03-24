@@ -16,6 +16,8 @@ namespace ShopVote.Models
         }
 
         public DbSet<Manufacturer> Manufacturers { get; set; }
+
+        public DbSet<Product> Products { get; set; }
     }
 
     [Table("Products")]
@@ -25,8 +27,10 @@ namespace ShopVote.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [ForeignKey("Filter")]
-        public int FilterId { get; set; }
+        [ForeignKey("Manufacturer")]
+        public virtual int ManufacturerID { get; set; }
+
+        public virtual Manufacturer Manufacturer { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }
