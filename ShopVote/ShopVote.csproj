@@ -185,7 +185,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Admin\ManufacturerController.cs" />
     <Compile Include="Controllers\Admin\ProductController.cs" />
-    <Compile Include="Controllers\Admin\ProductFilterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -337,11 +336,6 @@
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Product\Delete.cshtml" />
-    <Content Include="Views\ProductFilter\Index.cshtml" />
-    <Content Include="Views\ProductFilter\Details.cshtml" />
-    <Content Include="Views\ProductFilter\Create.cshtml" />
-    <Content Include="Views\ProductFilter\Edit.cshtml" />
-    <Content Include="Views\ProductFilter\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
