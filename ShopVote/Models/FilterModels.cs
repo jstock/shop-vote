@@ -8,18 +8,24 @@ using System.Web;
 
 namespace ShopVote.Models
 {
-  public class FiltersContext : DbContext 
+  public class ProductFiltersContext : DbContext 
   {
-    public FiltersContext()
+      public ProductFiltersContext()
       : base("DefaultConnection")
     {
     }
 
-    public DbSet<Filter> Filters { get; set; }
+    public DbSet<ProductFilter> Filters { get; set; }
+
+    public DbSet<FilterCategory> FilterCategories { get; set; }
+
+    public DbSet<Manufacturer> Manufacturers { get; set; }
+
+    public DbSet<Product> Products { get; set; }
   }
 
-  [Table("Filters")]
-  public class Filter
+  [Table("ProductFilters")]
+  public class ProductFilter
   {
     [Key]
     [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -28,11 +34,17 @@ namespace ShopVote.Models
     [ForeignKey("FilterCategory")]
     public int CategoryId { get; set; }
 
+    public virtual FilterCategory FilterCategory { get; set; }
+
     [ForeignKey("Manufacturer")]
     public int ManufacturerId { get; set; }
 
+    public virtual Manufacturer Manufacturer { get; set; }
+
     [ForeignKey("Product")]
     public int? ProductId { get; set; }
+
+    public virtual Product Product { get; set; }
 
     public string Name { get; set; }
     public Object Value { get; set; }
@@ -45,7 +57,7 @@ namespace ShopVote.Models
     {
     }
 
-    public DbSet<Filter> FilterCategories { get; set; }
+    public DbSet<ProductFilter> FilterCategories { get; set; }
   }
 
   [Table("FilterCategories")]

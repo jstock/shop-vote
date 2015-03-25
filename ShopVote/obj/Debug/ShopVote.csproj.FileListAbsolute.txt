@@ -155,4 +155,3 @@ C:\Users\Terabithia\Source\Repos\shop-vote\ShopVote\bin\zh-Hans\System.Spatial.r
 C:\Users\Terabithia\Source\Repos\shop-vote\ShopVote\bin\zh-Hant\System.Spatial.resources.dll
 C:\Users\Terabithia\Source\Repos\shop-vote\ShopVote\obj\Debug\ShopVote.dll
 C:\Users\Terabithia\Source\Repos\shop-vote\ShopVote\obj\Debug\ShopVote.pdb
-C:\Users\Terabithia\Source\Repos\shop-vote\ShopVote\obj\Debug\ShopVote.csprojResolveAssemblyReference.cache
