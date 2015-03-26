@@ -45,7 +45,7 @@ namespace ShopVote.Models
     {
     }
 
-    public DbSet<PMFilter> FilterCategories { get; set; }
+    public DbSet<FilterCategory> FilterCategories { get; set; }
   }
 
   [Table("FilterCategories")]
