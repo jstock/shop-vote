@@ -1,5 +1,41 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model IEnumerable<ShopVote.Models.Product>
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Manufacturer
+                    </th>
+                    <th>Product Name
+                    </th>
+                    <th>Product Description
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modleItem => item.Name)
+                        </td>
+                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                           @Html.ActionLink("Details", "Details", new { id = item.Id })
+           
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
