@@ -15,11 +15,11 @@ namespace ShopVote.Models
     {
     }
 
-    public DbSet<Filter> Filters { get; set; }
+    public DbSet<PMFilter> Filters { get; set; }
   }
 
   [Table("Filters")]
-  public class Filter
+  public class PMFilter
   {
     [Key]
     [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -45,7 +45,7 @@ namespace ShopVote.Models
     {
     }
 
-    public DbSet<Filter> FilterCategories { get; set; }
+    public DbSet<PMFilter> FilterCategories { get; set; }
   }
 
   [Table("FilterCategories")]
