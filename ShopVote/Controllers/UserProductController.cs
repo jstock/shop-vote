@@ -22,7 +22,12 @@ namespace ShopVote.Controllers
         }
         public ActionResult Details(int id = 0)
         {
-            return View();
+            var product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
         }
 
     }
