@@ -310,10 +310,6 @@ aside {
         margin: 0;
     }
 
-    #loginForm input {
-        width: 250px;
-    }
-
     #loginForm input[type="checkbox"],
     #loginForm input[type="submit"],
     #loginForm input[type="button"],
@@ -388,9 +384,7 @@ input, textarea {
     background: #FFF;
     color: #192823;
     font-size: 1.2em;
-    margin: 5px 0 6px 0;
-    padding: 5px;
-    width: 250px;
+    margin: 5px;
 }
 
 textarea {
