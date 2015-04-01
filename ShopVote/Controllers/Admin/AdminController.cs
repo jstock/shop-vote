@@ -26,8 +26,12 @@ namespace ShopVote.Controllers
 
         public ActionResult Product()
         {
+          if (ModelState.IsValid) {
             var products = db.Products.Where(p => p.Id > 0);
             return View(products.ToList());
+          } else {
+            throw new Exception("Error loading page.");
+          }
         }
 
         public ActionResult Company()
