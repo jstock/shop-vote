@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ShopVote.Models;
 
 namespace ShopVote.Controllers
 {
     public class AdminController : Controller
     {
+        private ProductContext db = new ProductContext();
+
         //
         // GET: /Admin/
 
@@ -23,7 +26,12 @@ namespace ShopVote.Controllers
 
         public ActionResult Product()
         {
-            return View();
+          if (ModelState.IsValid) {
+            var products = db.Products.Where(p => p.Id > 0);
+            return View(products.ToList());
+          } else {
+            throw new Exception("Error loading page.");
+          }
         }
 
         public ActionResult Company()

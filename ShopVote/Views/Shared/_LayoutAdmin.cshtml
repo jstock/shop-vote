@@ -36,7 +36,7 @@
             <ul class="nav nav-sidebar">
                 <li class="@(ViewContext.RouteData.Values["Action"].Equals("Index")&&ViewContext.RouteData.Values["Controller"].Equals("Admin") ? "active" : "")"><a href="@Url.Action("Index", "Admin")">Overview</a></li>
                 <li class="@(ViewContext.RouteData.Values["Action"].Equals("Category") ? "active" : "")"><a href="@Url.Action("Category", "Admin")">Categories</a></li>
-                <li class="@(ViewContext.RouteData.Values["Controller"].Equals("Product") ? "active" : "")"><a href="@Url.Action("Index", "Product")">Products</a></li>
+                <li class="@(ViewContext.RouteData.Values["Action"].Equals("Product") ? "active" : "")"><a href="@Url.Action("Product", "Admin")">Products</a></li>
                 <li class="@(ViewContext.RouteData.Values["Controller"].Equals("Manufacturer") ? "active" : "")"><a href="@Url.Action("Index", "Manufacturer")">Companies</a></li>
             </ul>
             <ul class="nav nav-sidebar">
