@@ -241,3 +241,7 @@ C:\Users\Zhewen\Documents\Capstone\ShopVote\bin\zh-Hant\System.Spatial.resources
 C:\Users\Zhewen\Documents\Capstone\ShopVote\obj\Debug\ShopVote.csprojResolveAssemblyReference.cache
 C:\Users\Zhewen\Documents\Capstone\ShopVote\obj\Debug\ShopVote.dll
 C:\Users\Zhewen\Documents\Capstone\ShopVote\obj\Debug\ShopVote.pdb
+C:\Users\James\Source\Repos\ShopVote\ShopVote\bin\MySql.Data.dll
+C:\Users\James\Source\Repos\ShopVote\ShopVote\bin\EntityFramework.SqlServer.dll
+C:\Users\James\Source\Repos\ShopVote\ShopVote\bin\MySql.Data.Entity.EF6.dll
+C:\Users\James\Source\Repos\ShopVote\ShopVote\bin\EntityFramework.SqlServer.xml
