@@ -29,7 +29,6 @@ namespace ShopVote.Models
 
         [ForeignKey("Manufacturer")]
         public virtual int ManufacturerID { get; set; }
-
         public virtual Manufacturer Manufacturer { get; set; }
 
         public string Name { get; set; }
