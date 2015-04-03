@@ -18,7 +18,7 @@ namespace ShopVote.Models
         public DbSet<Manufacturer> Manufacturers { get; set; }
     }
 
-    [Table("Manufacturer")]
+    [Table("Manufacturers")]
     public class Manufacturer
     {
         [Key]

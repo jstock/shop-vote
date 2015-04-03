@@ -24,17 +24,19 @@ namespace ShopVote.Models
     [Key]
     [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
+    
+    public virtual int CategoryID { get; set; }
+    [ForeignKey("CategoryID")]
+    public virtual FilterCategory Category { get; set; }
+    
+    public virtual int ManufacturerID { get; set; }
+    [ForeignKey("ManufacturerID")]
+    public virtual Manufacturer Manufacturer { get; set; }
+    
+    public virtual int? ProductID { get; set; }
+    [ForeignKey("ProductID")]
+    public virtual Product Product { get; set; }
 
-    [ForeignKey("FilterCategory")]
-    public int CategoryId { get; set; }
-
-    [ForeignKey("Manufacturer")]
-    public int ManufacturerId { get; set; }
-
-    [ForeignKey("Product")]
-    public int? ProductId { get; set; }
-
-    public string Name { get; set; }
     public Object Value { get; set; }
   }
 

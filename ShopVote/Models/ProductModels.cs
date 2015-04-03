@@ -27,9 +27,8 @@ namespace ShopVote.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [ForeignKey("Manufacturer")]
         public virtual int ManufacturerID { get; set; }
-
+        [ForeignKey("ManufacturerID")]
         public virtual Manufacturer Manufacturer { get; set; }
 
         public string Name { get; set; }
