@@ -118,8 +118,6 @@ namespace ShopVote.Models
     [Display(Name = "Zip")]
     public string Zip { get; set; }
 
- 
-
   }
 
   public class ExternalLogin

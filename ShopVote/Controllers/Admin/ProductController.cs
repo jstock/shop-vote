@@ -55,7 +55,7 @@ namespace ShopVote.Controllers.Admin
             {
                 db.Products.Add(product);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Product", "Admin");
             }
 
             ViewBag.ManufacturerID = new SelectList(db.Manufacturers, "Id", "Name", product.ManufacturerID);
