@@ -245,3 +245,4 @@ C:\Users\James\Source\Repos\ShopVote\ShopVote\bin\zh-Hant\System.Spatial.resourc
 C:\Users\James\Source\Repos\ShopVote\ShopVote\obj\Debug\ShopVote.csprojResolveAssemblyReference.cache
 C:\Users\James\Source\Repos\ShopVote\ShopVote\obj\Debug\ShopVote.dll
 C:\Users\James\Source\Repos\ShopVote\ShopVote\obj\Debug\ShopVote.pdb
+C:\Users\James\Source\Repos\ShopVote\ShopVote\bin\MySql.Web.dll
