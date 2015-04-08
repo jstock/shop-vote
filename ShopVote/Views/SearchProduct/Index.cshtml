@@ -1,0 +1,30 @@
+@model IEnumerable<ShopVote.Models.Product>
+
+@{
+    ViewBag.Title = “Search Page”;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div style=“font-family:Arial”>
+ @using(html.Beginform(“index”,”SearchProduct”,FormMethod.Get))
+ {
+   <text>Search by Product Name<text></br>
+   @html.text("search”)<input type=“submit” value=“Search”/>
+ }
+ <table border=“”>
+  <tr>
+   <th>@Html.DisplayNameFor(model=>model.Name)
+   </th>
+   <th>@Html.DisplayNameFor(model=>model.Describtion)
+   </th>
+  </tr>
+@foreach(var item in model){
+  <tr>
+   <td>@Html.DisplayFor(modelItem=>item.Name)
+   </td>
+   <td>@Html.DisplayFor(modelItem=>item.Describtion)
+   </td>
+  </tr>
+}
+ </table>
+</div>

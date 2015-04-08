@@ -17,7 +17,7 @@ namespace ShopVote.Controllers
 
         public ActionResult Index(string search)
         {
-          return view(db.product.where(x=>x.Name.StartsWith(search).Tolist))
+          return view(db.product.where(x=>x.Name.StartsWith(search).ToList))
         }
     }
 }
