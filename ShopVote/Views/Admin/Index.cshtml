@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewBag.Title = "Admin Page - Overview";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
@@ -24,6 +24,11 @@
         <div class="col-xs-6 col-sm-3 placeholder">
             <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
             <h4>Question</h4>
+            <span class="text-muted">Some Description</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+            <h4>@html.ActionLink(“Add Administrators”,”addAdmins”)</h4>
             <span class="text-muted">Some Description</span>
         </div>
     </div>
