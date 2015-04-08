@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ShopVote.filters;
 using ShopVote.Models;
 
 namespace ShopVote.Controllers.Admin
@@ -31,7 +32,40 @@ namespace ShopVote.Controllers.Admin
             var products = db.Products.Include(p => p.Manufacturer);
             return View(products.ToList());
         }
+	
+        // add administrators 
+        public ActionResult addAdmins()
+        {
+            return view();
+        }
+        
+        // Admin can register a new user as admin, and the new user will be an admin.
+        [HttpPost]
+        [Authorize(Roles = "Admin")] // only admin user can access this page
+        [ValidateAntiForgeryToken] // Stop people submitting rubbish to your database
+        public ActionResult addAdmins(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Attempt TO REGISTER the user
+                try
+                {
+                    WebSecurity.CreateUserAndAccount(model.USERNAME, model.Password);
 
+                    Roles.AddUserToRole(model.USERNAME, "Admin"); // 
+                    WebSecurity.LOGIN(model.USERNAME, model.Password);
+
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
         //
         // POST: /Admin/EditProduct
 
