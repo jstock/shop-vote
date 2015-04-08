@@ -208,6 +208,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\FilterModels.cs" />
+    <Compile Include="Models\FilterProfileModels.cs" />
     <Compile Include="Models\ManufacturerModels.cs" />
     <Compile Include="Models\ProductModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
