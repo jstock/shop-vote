@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewBag.Title = "Admin";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
@@ -13,6 +13,7 @@
                     <th>Admin ID</th>
                     <th>Name</th>
                     <th>E-mail</th>
+	            <th>@html.ActionLink(“Add Administrators”,”addAdmins”)</th>
                 </tr>
             </thead>
             <tbody>
