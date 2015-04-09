@@ -201,6 +201,7 @@
     <Compile Include="Controllers\Admin\ProductController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\UserProductController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -355,6 +356,9 @@
     <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\UserProduct\Details.cshtml" />
     <Content Include="Views\UserProduct\Index.cshtml" />
+    <Content Include="Views\Home\Questions.cshtml" />
+    <Content Include="Views\Questions\Index.cshtml" />
+    <Content Include="Views\Shared\_LoginDropDownPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

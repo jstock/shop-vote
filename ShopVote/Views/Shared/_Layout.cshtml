@@ -1,5 +1,4 @@
-﻿@model ShopVote.Models.LoginModel
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -58,11 +57,6 @@
       margin-top: 16px;
       left: 0px;
       width: 175px;
-      height: 550px;
-      border-top-right-radius: 8px;
-      -moz-border-radius-topright: 8px;
-      border-bottom-right-radius: 8px;
-      -moz-border-radius-bottomright: 8px;
     }
 
     div.form-group, div.checkbox {
@@ -73,6 +67,22 @@
         font-size: 1em;
         margin-left: 4px;
       }
+
+    div.nav-menu > div {
+      padding: 16px 0;
+      border-top-right-radius: 8px;
+      -webkit-border-top-right-radius: 8px;
+      -moz-border-radius-topright: 8px;
+      border-bottom-right-radius: 8px;
+      -webkit-border-bottom-right-radius: 8px;
+      -moz-border-radius-bottomright: 8px;
+    }
+
+    div.nav-menu > div:hover {
+      background-color: #A2D7D8;
+      cursor: default;
+    }
+
   </style>
   <script type="text/javascript">
 
@@ -122,35 +132,16 @@
     </div>
   </header>
   <div id="divLogin" style="position: absolute; top: 76px; right: 0px; border: 1px solid black; border-top: none; border-right: none; background-color: #EDEDEA; display: none; z-index: 100;">
-    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { ReturnUrl = ViewBag.ReturnUrl }))
-    {
-      @Html.AntiForgeryToken()
-      @Html.ValidationSummary(true)
-      <div>
-        <div class="form-group">
-          @Html.LabelFor(m => m.UserName)
-          @Html.TextBoxFor(m => m.UserName)
-          @Html.ValidationMessageFor(m => m.UserName)
-        </div>
-        <div class="form-group">
-          @Html.LabelFor(m => m.Password)
-          @Html.PasswordFor(m => m.Password)
-          @Html.ValidationMessageFor(m => m.Password)
-        </div>
-        <div class="checkbox">
-          @Html.CheckBoxFor(m => m.RememberMe)
-          @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-        </div>
-        <div style="margin: 4px 0; text-align: center;">
-          <input title="login" type="submit" value="login" />
-        </div>
-      </div>
-    }
+    @Html.Partial("_LoginDropDownPartial", new ShopVote.Models.LoginModel())
   </div>
   <div id="body" style="min-height: 750px; padding-top: 86px;">
     @if (Request.IsAuthenticated)
     {
       <div class="nav-menu">
+        <div style="display: inline-block; text-align: center; width: 100%; line-height: 40px; vertical-align: middle;" 
+          onclick="javascript:document.location.href = /Questions/;">
+          Questions
+        </div>
       </div>
       <div style="margin-left: 190px; margin-right: 16px;">
         <section class="content-wrapper main-content clear-fix">

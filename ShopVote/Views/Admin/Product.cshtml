@@ -121,7 +121,7 @@
     </div>
 
     <div id="divProducts" class="table-responsive">
-      @{ var grid = new WebGrid(Model, rowsPerPage: 50); }
+      @{ var grid = new WebGrid(Model, rowsPerPage: 100); }
       @grid.GetHtml(
         tableStyle: "table table-striped",
         mode: WebGridPagerModes.All,

@@ -14,13 +14,15 @@ namespace ShopVote.Models
         base("DefaultConnection") {
         }
         public DbSet<FilterProfile> FilterProfiles { get; set; }
+        public DbSet<Question> Questions { get; set; }
   }
 
   [Table("FilterProfiles")]
   public class FilterProfile {
+
     [Key]
     [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-    public int Id;
+    public int Id { get; set; }
 
     public virtual int UserID { get; set; }
     [ForeignKey("UserID")]
@@ -35,6 +37,21 @@ namespace ShopVote.Models
     public virtual FilterCategory Category { get; set; }
 
     public Object Value { get; set; }
+
+  }
+
+  [Table("Questions")]
+  public class Question {
+
+    [Key]
+    [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
+
+    public virtual int CategoryID { get; set; }
+    [ForeignKey("CategoryID")]
+    public virtual FilterCategory Category { get; set; }
+
+    public string Description { get; set; }
 
   }
 
