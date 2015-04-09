@@ -9,7 +9,7 @@ using ShopVote.Models;
 
 namespace ShopVote.Controllers.Admin
 {
-    public class ProductController : Controller
+    public class ProductsController : Controller
     {
         private ProductContext db = new ProductContext();
 

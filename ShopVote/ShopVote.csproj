@@ -198,7 +198,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Admin\ManufacturerController.cs" />
-    <Compile Include="Controllers\Admin\ProductController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
@@ -349,11 +349,11 @@
     <Content Include="Views\Manufacturer\Create.cshtml" />
     <Content Include="Views\Manufacturer\Edit.cshtml" />
     <Content Include="Views\Manufacturer\Delete.cshtml" />
-    <Content Include="Views\Product\Index.cshtml" />
-    <Content Include="Views\Product\Details.cshtml" />
-    <Content Include="Views\Product\Create.cshtml" />
-    <Content Include="Views\Product\Edit.cshtml" />
-    <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\UserProduct\Details.cshtml" />
     <Content Include="Views\UserProduct\Index.cshtml" />
     <Content Include="Views\Home\Questions.cshtml" />

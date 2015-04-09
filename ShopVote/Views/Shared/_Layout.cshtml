@@ -68,21 +68,25 @@
         margin-left: 4px;
       }
 
-    div.nav-menu > div {
-      padding: 16px 0;
-      border-top-right-radius: 8px;
-      -webkit-border-top-right-radius: 8px;
-      -moz-border-radius-topright: 8px;
-      border-bottom-right-radius: 8px;
-      -webkit-border-bottom-right-radius: 8px;
-      -moz-border-radius-bottomright: 8px;
+    div.nav-menu {
+      border-collapse: collapse;
     }
 
-    div.nav-menu > div:hover {
-      background-color: #A2D7D8;
-      cursor: default;
-    }
+      div.nav-menu > div {
+        background-color: #7FF17F;
+        padding: 16px 0;
+        border-top: 1px solid #808080;
+      }
 
+        div.nav-menu > div:first-child {
+          border-top: none;
+        }
+
+        div.nav-menu > div:hover {
+          background-color: #A2D7D8;
+          cursor: default;
+          box-shadow: 2px 0 #808080;
+        }
   </style>
   <script type="text/javascript">
 
@@ -138,9 +142,13 @@
     @if (Request.IsAuthenticated)
     {
       <div class="nav-menu">
-        <div style="display: inline-block; text-align: center; width: 100%; line-height: 40px; vertical-align: middle;" 
-          onclick="javascript:document.location.href = /Questions/;">
+        <div style="text-align: center; width: 100%; line-height: 40px; vertical-align: middle;"
+          onclick="javascript:document.location.href = /questions/;">
           Questions
+        </div>
+        <div style="text-align: center; width: 100%; line-height: 40px; vertical-align: middle;"
+          onclick="javascript:document.location.href = /products/;">
+          Products
         </div>
       </div>
       <div style="margin-left: 190px; margin-right: 16px;">
