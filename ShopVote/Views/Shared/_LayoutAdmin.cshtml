@@ -35,10 +35,10 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="@(ViewContext.RouteData.Values["Action"].Equals("Index")&&ViewContext.RouteData.Values["Controller"].Equals("Admin") ? "active" : "")"><a href="@Url.Action("Index", "Admin")">Overview</a></li>
-                <li class="@(ViewContext.RouteData.Values["Action"].Equals("Category") ? "active" : "")"><a href="@Url.Action("Category", "Admin")">Categories</a></li>
-                <li class="@(ViewContext.RouteData.Values["Action"].Equals("Product") ? "active" : "")"><a href="@Url.Action("Product", "Admin")">Products</a></li>
-                <li class="@(ViewContext.RouteData.Values["Controller"].Equals("Manufacturer") ? "active" : "")"><a href="@Url.Action("Index", "Manufacturer")">Companies</a></li>
+                <li class="@(ViewContext.RouteData.Values["Action"].Equals("index") || ViewContext.RouteData.Values["Action"].Equals("") ? "active" : "")"><a href="@Url.Action("index", "admin")">Overview</a></li>
+                <li class="@(ViewContext.RouteData.Values["Action"].Equals("category") ? "active" : "")"><a href="@Url.Action("category", "admin")">Categories</a></li>
+                <li class="@(ViewContext.RouteData.Values["Action"].Equals("products") ? "active" : "")"><a href="@Url.Action("products", "admin")">Products</a></li>
+                <li class="@(ViewContext.RouteData.Values["Action"].Equals("manufacturers") ? "active" : "")"><a href="@Url.Action("manufacturers", "admin")">Manufacturers</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="@(ViewContext.RouteData.Values["Action"].Equals("ManageUser") ? "active" : "")"><a href="@Url.Action("ManageUser", "Admin")">Users</a></li>
