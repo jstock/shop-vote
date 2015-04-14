@@ -1,0 +1,32 @@
+﻿1 @model IEnumerable<ShopVote.Models.Product> 
+2 
+ 
+3 @{ 
+4     ViewBag.Title = “Search Page”; 
+5     Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; 
+6 }
+8 <div style=“font-family:Arial”> 
+9  @using(html.Beginform(“index”,”SearchProduct”,FormMethod.Get)) 
+10  { 
+11    <text>Search by Product Name<text></br> 
+12    @html.text("search”)<input type=“submit” value=“Search”/> 
+13  } 
+14  <table border=“”> 
+15   <tr> 
+16    <th>@Html.DisplayNameFor(model=>model.Name) 
+17    </th> 
+18    <th>@Html.DisplayNameFor(model=>model.Describtion) 
+19    </th> 
+20   </tr> 
+21 @foreach(var item in model){ 
+22   <tr> 
+23    <td>@Html.DisplayFor(modelItem=>item.Name) 
+24    </td> 
+25    <td>@Html.DisplayFor(modelItem=>item.Describtion) 
+26    </td> 
+       <td> @Html.ActionLink("Edit", "Edit", new { id = item.Id }) | @Html.ActionLink("Details", "Details", new { id = item.Id }) | @Html.ActionLink("Delete", "Delete", new { id = item.Id }) 
+34     </td> 
+27   </tr> 
+28 } 
+29  </table> 
+30 </div> 
