@@ -18,7 +18,7 @@ namespace ShopVote.Controllers.Admin
 
         public ActionResult Index()
         {
-            return View(db.Manufacturers.ToList());
+            return View(db.Manufacturers.OrderBy(m => m.Name).ToList());
         }
 
         //

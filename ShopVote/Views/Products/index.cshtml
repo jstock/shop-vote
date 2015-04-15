@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ShopVote.Models.Product> 
+@{ 
+  ViewBag.Title = "Products";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+  @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+  {
+    <div>
+      Name/Description: @Html.TextBox("searchText")
+      <input type="submit" value="Search" />
+    </div>
+    var grid = new WebGrid(Model, rowsPerPage: 100);
+    @grid.GetHtml(
+      tableStyle: "table table-striped",
+      mode: WebGridPagerModes.All,
+      columns: grid.Columns(
+        grid.Column("Manufacturer",
+          format: @<text> 
+                    <span class="display-mode"> <label id="lblManufacturer">@item.Manufacturer.Name</label> </span>
+                  </text>
+        ),
+        grid.Column("Name",
+          format: @<text> 
+                    <span class="display-mode"> <label id="lblName">@item.Name</label> </span>
+                  </text>
+        ),
+        grid.Column("Description",
+          format: @<text> 
+                    <span class="display-mode"> <label id="lblDescription">@item.Description</label> </span>
+                  </text>
+        )
+      )
+    )
+  }

@@ -9,16 +9,21 @@ using ShopVote.Models;
 
 namespace ShopVote.Controllers.Admin
 {
-    public class ProductController : Controller
+    public class ProductsController : Controller
     {
         private ProductContext db = new ProductContext();
 
         //
         // GET: /Product/
 
-        public ActionResult Index()
+        public ActionResult Index(string searchText = "")
         {
-            var products = db.Products.Include(p => p.Manufacturer);
+            var products = db.Products.Where(p => p.Id > 0).Include(p => p.Manufacturer);
+            
+            if (!String.IsNullOrWhiteSpace(searchText)) {
+              products = products.Where(p => p.Name.Contains(searchText) || p.Description.Contains(searchText));
+            } 
+
             return View(products.ToList());
         }
 

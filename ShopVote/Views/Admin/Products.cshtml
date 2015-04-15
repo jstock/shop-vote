@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ShopVote.Models.Product>
 
 @{
-    ViewBag.Title = "Product";
+    ViewBag.Title = "Products";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -98,6 +98,20 @@
 
 </script>
 
+<style>
+
+  tfoot > tr > td {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.2em;
+  }
+
+    tfoot > tr > td > a {
+      font-weight: normal;
+    }
+
+</style>
+
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">@ViewBag.Title</h1>
     <div class="form-group">
@@ -107,7 +121,7 @@
     </div>
 
     <div id="divProducts" class="table-responsive">
-      @{ var grid = new WebGrid(Model); }
+      @{ var grid = new WebGrid(Model, rowsPerPage: 100); }
       @grid.GetHtml(
         tableStyle: "table table-striped",
         mode: WebGridPagerModes.All,
