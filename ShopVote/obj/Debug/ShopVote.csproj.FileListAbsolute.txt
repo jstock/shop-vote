@@ -246,3 +246,8 @@ C:\Users\James\Source\Repos\ShopVote\ShopVote\obj\Debug\ShopVote.csprojResolveAs
 C:\Users\James\Source\Repos\ShopVote\ShopVote\obj\Debug\ShopVote.dll
 C:\Users\James\Source\Repos\ShopVote\ShopVote\obj\Debug\ShopVote.pdb
 C:\Users\James\Source\Repos\ShopVote\ShopVote\bin\MySql.Web.dll
+C:\Users\Terabithia\Source\Repos\shop-vote\ShopVote\bin\EntityFramework.SqlServer.dll
+C:\Users\Terabithia\Source\Repos\shop-vote\ShopVote\bin\MySql.Data.dll
+C:\Users\Terabithia\Source\Repos\shop-vote\ShopVote\bin\MySql.Data.Entity.EF6.dll
+C:\Users\Terabithia\Source\Repos\shop-vote\ShopVote\bin\MySql.Web.dll
+C:\Users\Terabithia\Source\Repos\shop-vote\ShopVote\bin\EntityFramework.SqlServer.xml
