@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ShopVote.Models.Manufacturer>
+@{
+    ViewBag.Title = "Manufacturers";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">@ViewBag.Title</h1>
+    <div class="form-group">
+        <div class="">
+            <a href="@Url.Action("Create", "Manufacturer")" class="btn btn-primary" role="button" style="color:white;">Add New</a>
+        </div>
+    </div>
+    <div id="divManufacturers" class="table-responsive">
+      @{ var grid = new WebGrid(Model, rowsPerPage: 100); }
+      @grid.GetHtml(
+        tableStyle: "table table-striped",
+        mode: WebGridPagerModes.All,
+        columns: grid.Columns(
+          grid.Column("ID", 
+            format: @<text> 
+                      <span class="display-mode"> <label>@item.ID</label> </span> 
+                    </text>
+          ),
+          grid.Column("Name",
+            format: @<text> 
+                      <span class="display-mode"> <label id="lblManufacturer">@item.Name</label> </span>
+                    </text>
+          )
+        )
+      )
+    </div>
+</div>

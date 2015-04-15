@@ -1,0 +1,20 @@
+﻿@model Tuple<List<ShopVote.Models.FilterCategory>, List<ShopVote.Models.Question>>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+  <h1 class="page-header">@ViewBag.Title</h1>
+  <div class="table-responsive">
+    @foreach (var cat in Model.Item1)
+    {
+      <div style="font-size: 22px; font-weight: bold; margin: 8px 0;">
+        @Html.DisplayFor(modelItem => cat.Name)
+        @foreach (var quest in Model.Item2.Where(q => q.CategoryID == cat.Id))
+        {
+          <div style="font-size: 14px; font-weight: normal; margin: 8px 0 8px 16px;">
+            @Html.DisplayFor(modelItem => quest.Description)
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>
+

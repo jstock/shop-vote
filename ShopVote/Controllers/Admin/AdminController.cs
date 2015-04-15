@@ -12,6 +12,7 @@ namespace ShopVote.Controllers.Admin
     public class AdminController : Controller
     {
         private ProductContext db = new ProductContext();
+        private ManufacturersContext mb = new ManufacturersContext();
 
         //
         // GET: /Admin/
@@ -26,10 +27,16 @@ namespace ShopVote.Controllers.Admin
             return View();
         }
 
-        public ActionResult Product()
+        public ActionResult Products()
         {
             var products = db.Products.Include(p => p.Manufacturer);
             return View(products.ToList());
+        }
+
+        public ActionResult Manufacturers() 
+        {
+            var manufacturers = db.Manufacturers.Where(m => m.Id > 0).OrderBy(m => m.Name);
+            return View(manufacturers.ToList());
         }
 
         //

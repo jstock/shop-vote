@@ -1,0 +1,164 @@
+﻿@model IEnumerable<ShopVote.Models.Product>
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script type="text/javascript">
+
+  $(function () {
+
+    // Pre-load manufacturers to populate edit dropdowns
+    var manufacturers = [];
+    $.getJSON('/Admin/GetManufacturers/', function (result) {
+      var i = 0;
+      $(result).each(function () {
+        manufacturers[i] = this;
+        i = i + 1;
+      });
+    });
+
+    // Populate manufacturer dropdown on edit click
+    $('.edit-product').click(function () {
+      var prod = $(this).parents('tr:first');
+      var mans = prod.find('#prodManufacturer');
+      var om = prod.find('#lblManufacturer').text();
+      mans.empty();
+      var j = 0;
+      for (j = 0; j < manufacturers.length; j = j + 1) {
+        var m = $(document.createElement('option'))
+                    .attr('value', manufacturers[j].Id)
+                    .text(manufacturers[j].Name);
+        if (manufacturers[j].Name === om) {
+          m.attr('selected', 'selected');
+        }
+        m.appendTo(mans);
+      }
+    });
+
+    // Logic for toggling display/edit css classes
+    $('.edit-mode').hide();
+    $('.edit-product, .cancel-product').click(function () {
+      var row = $(this).parents('tr:first');
+      row.find('.edit-mode, .display-mode').toggle();
+    });
+
+    // Handle edited product information
+    $('.save-product').click(function () {
+      var prod = $(this).parents('tr:first');
+      var id = parseInt(prod.find('#ID').text());
+      var manID = prod.find('#prodManufacturer').val();
+      var manufacturer = prod.find('#prodManufacturer option:selected').text();
+      var name = prod.find('#prodName').val();
+      var description = prod.find('#prodDescription').val();
+      prod.find('#lblName').text(name);
+      prod.find('#lblManufacturer').text(manufacturer);
+      prod.find('#lblDescription').text(description);
+      var Product = {
+        'Id': id,
+        'ManufacturerID': manID,
+        'Name': name,
+        'Description': description
+      };
+
+      // Push edited JSON with ajax
+      $.ajax({
+        url: '/Admin/EditProduct/',
+        data: JSON.stringify(Product),
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        success: function (msg) {
+          alert(msg);
+        }
+      });
+
+    });
+
+    // Handle product deletion
+    $('.delete-product').click(function () {
+      var prod = $(this).parents('tr:first');
+      var id = prod.find('#ID').text();
+      if (confirm('are you sure you want to delete this product?')) {
+        var ID = { 'ID': id };
+        $.ajax({
+          url: '/Admin/DeleteProduct/',
+          data: JSON.stringify(ID),
+          type: 'POST',
+          contentType: 'application/json; charset=utf-8',
+          success: function (msg) {
+            alert(msg);
+            window.location.href = '/Admin/Product/';
+          }
+        });
+      }
+    });
+
+  });
+
+</script>
+
+<style>
+
+  tfoot > tr > td {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.2em;
+  }
+
+    tfoot > tr > td > a {
+      font-weight: normal;
+    }
+
+</style>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">@ViewBag.Title</h1>
+    <div class="form-group">
+        <div class="">
+            <a href="@Url.Action("Create", "Product")" class="btn btn-primary" role="button" style="color:white;">Add New</a>
+        </div>
+    </div>
+
+    <div id="divProducts" class="table-responsive">
+      @{ var grid = new WebGrid(Model, rowsPerPage: 100); }
+      @grid.GetHtml(
+        tableStyle: "table table-striped",
+        mode: WebGridPagerModes.All,
+        columns: grid.Columns(
+          grid.Column("ID", 
+            format: @<text> 
+                      <span class="display-mode"> <label>@item.ID</label> </span>
+                      <span class="edit-mode"> <label id="ID">@item.ID</label> </span> 
+                    </text>
+          ),
+          grid.Column("Manufacturer",
+            format: @<text> 
+                      <span class="display-mode"> <label id="lblManufacturer">@item.Manufacturer.Name</label> </span>
+                      <select id="prodManufacturer" class="edit-mode"></select> 
+                    </text>
+          ),
+          grid.Column("Name",
+            format: @<text> 
+                      <span class="display-mode"> <label id="lblName">@item.Name</label> </span>
+                      <input type="text" id="prodName" value="@item.Name" class="edit-mode" /> 
+                    </text>
+          ),
+          grid.Column("Description",
+            format: @<text> 
+                      <span class="display-mode"> <label id="lblDescription">@item.Description</label> </span>
+                      <input type="text" id="prodDescription" value="@item.Description" class="edit-mode" /> 
+                    </text>
+          ),
+          grid.Column("Action",
+            format: @<text> 
+                      <button class="edit-product display-mode">Edit</button>  
+                      <button class="delete-product display-mode">Delete</button>
+                      <button class="save-product edit-mode">Save</button>  
+                      <button class="cancel-product edit-mode">Cancel</button>  
+                    </text>, canSort: false)
+          )
+        )
+
+    </div>
+</div>
