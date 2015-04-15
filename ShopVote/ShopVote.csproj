@@ -359,12 +359,9 @@
     <Content Include="Views\UserProduct\Index.cshtml" />
     <Content Include="Views\Questions\Index.cshtml" />
     <Content Include="Views\Shared\_LoginDropDownPartial.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\ShoppingList\Index.cshtml" />
     <Content Include="Views\ShoppingList\Display.cshtml" />
-=======
     <Content Include="Views\Admin\Manufacturers.cshtml" />
->>>>>>> c454bd1120f2d4d5aeb72030219af2933906d37c
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
