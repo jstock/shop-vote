@@ -3,7 +3,7 @@
     ViewBag.Title = "Shopping List Index";
 }
 
-<h2>Index</h2>
+<h2>Create List</h2>
 
  <div>
      @using (Html.BeginForm())
@@ -16,12 +16,12 @@
          <div class="editor-label">
           @Html.LabelFor(c => c.ListName, "Shopping List Name")
           @Html.EditorFor(c => c.ListName)
-         
         </div>
          <div class="editor-label">
           @Html.LabelFor(c => c.UserId, "User ID")
           @Html.EditorFor(c => c.UserId)
         </div>
+           <br />
      <p>
             <input type="submit" value="Create" />
         </p>

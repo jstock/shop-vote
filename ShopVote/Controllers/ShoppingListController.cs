@@ -28,14 +28,13 @@ namespace ShopVote.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Create(ShoppingList model)
         {
-            if (ModelState.IsValid || true)
-            {
-                db.ShoppingList.Add(model);
-                db.SaveChanges();
-               // return RedirectToAction("Dislpay");
-            }
+            
+                //db.ShoppingList.Add(model);
+              //  db.SaveChanges();
+                return HttpNotFound();
+            
 
-            return View();
+          //  return View();
         }
         public ActionResult Display(ShoppingList model)
         {
@@ -52,7 +51,7 @@ namespace ShopVote.Controllers.Admin
         // GET: /ShoppingList/Create
         public ActionResult Create()
         {
-            return View();
+            return HttpNotFound();
         }
 
     }
