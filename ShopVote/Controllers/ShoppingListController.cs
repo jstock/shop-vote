@@ -23,14 +23,16 @@ namespace ShopVote.Controllers.Admin
         {
             return View();
         }
+        // POST: /ShoppingList/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(ShoppingList model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid || true)
             {
                 db.ShoppingList.Add(model);
                 db.SaveChanges();
+               // return RedirectToAction("Dislpay");
             }
 
             return View();
@@ -46,12 +48,12 @@ namespace ShopVote.Controllers.Admin
                 }
             }
             return View();
-
-
-
-
-
-
         }
+        // GET: /ShoppingList/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
     }
 }
