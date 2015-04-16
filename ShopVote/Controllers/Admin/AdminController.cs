@@ -13,6 +13,7 @@ namespace ShopVote.Controllers.Admin
     {
         private ProductContext db = new ProductContext();
         private ManufacturersContext mb = new ManufacturersContext();
+        private FilterCategoryContext ct = new FilerCategoryContext();
 
         //
         // GET: /Admin/
@@ -24,8 +25,108 @@ namespace ShopVote.Controllers.Admin
 
         public ActionResult Category()
         {
+            return View(ct.FilterCategories.ToList());
+        }
+
+        //
+        // GET: /Category/Details/5
+
+        public ActionResult CategoryDetails(int id = 0)
+        {
+            FilterCategory categ = ct.Filters.Find(id);
+            if (categ == null)
+            {
+                return HttpNotFound();
+            }
+            return View(categ);
+        }
+
+        //
+        // GET: /category/Create
+
+        public ActionResult CategoryCreate()
+        {
+            ViewBag.CategoryId = new SelectList(ct.FilterCategories, "Id", "Name");
             return View();
         }
+
+        //
+        // POST: /ProductFilter/Create
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CategoryCreate(FilterCategory categ)
+        {
+            if (ModelState.IsValid)
+            {
+                ct.FilterCategories.Add(categ);
+                ct.SaveChanges();
+                return RedirectToAction("Categ");
+            }
+
+            ViewBag.CategoryId = new SelectList(ct.FilterCategories, "Id", "Name", productfilter.CategoryId);
+            return View(productfilter);
+        }
+
+        //
+        // GET: /cetagory/Edit/#
+
+        public ActionResult CategoryEdit(int id = 0)
+        {
+            FilterCategory categ = ct.FilterCategories.Find(id);
+            if (productfilter == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CategoryId = new SelectList(ct.FilterCategories, "Id", "Name", productfilter.CategoryId);
+            return View(productfilter);
+        }
+
+        //
+        // POST: /ProductFilter/Edit/5
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CategoryEdit(Category categ)
+        {
+            if (ModelState.IsValid)
+            {
+                ct.Entry(categ).State = EntityState.Modified;
+                ct.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.CategoryId = new SelectList(db.FilterCategories, "Id", "Name", productfilter.CategoryId);
+            return View(categ);
+        }
+
+        //
+        // GET: /category/Delete/5
+
+        public ActionResult CategoryDelete(int id = 0)
+        {
+            FilterCategory categ = ct.FilterCategories.Find(id);
+            if (categ == null)
+            {
+                return HttpNotFound();
+            }
+            return View(categ);
+        }
+
+        //
+        // POST: /category/Delete/#
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CategoryDeleteConfirmed(int id)
+        {
+            FilterCategory categ = ct.FilterCategories.Find(id);
+            ct.FilterCategories.Remove(categ);
+            ct.SaveChanges();
+            return RedirectToAction("Category");
+        }
+
+
+
 
         public ActionResult Products()
         {
