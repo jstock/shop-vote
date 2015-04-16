@@ -44,6 +44,7 @@ namespace ShopVote.Controllers.Admin
         //
         // GET: /category/Create
 
+        public ActionResult CategoryCreate()
         {
             ViewBag.CategoryId = new SelectList(ct.FilterCategories, "Id", "Name");
             return View();
@@ -54,6 +55,7 @@ namespace ShopVote.Controllers.Admin
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public ActionResult CategoryCreate(FilterCategory categ)
         {
             if (ModelState.IsValid)
             {
@@ -69,6 +71,7 @@ namespace ShopVote.Controllers.Admin
         //
         // GET: /cetagory/Edit/#
 
+        public ActionResult CategoryEdit(int id = 0)
         {
             FilterCategory categ = ct.FilterCategories.Find(id);
             if (productfilter == null)
