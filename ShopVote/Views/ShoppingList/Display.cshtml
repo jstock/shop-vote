@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ShopVote.Models.ShoppingList>
+
+@{
+    ViewBag.Title = "ShoppingListDisplay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Display</h2>
+    @foreach (var m in Model)
+    {
+         <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => m.ShoppingListId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => m.ListName)
+                        </td>
+                       
+     
+                    </tr>
+    }
