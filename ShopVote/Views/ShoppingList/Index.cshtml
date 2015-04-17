@@ -1,36 +1,65 @@
 ﻿@model ShopVote.Models.ShoppingList
 @{
-    ViewBag.Title = "Shopping List Index";
+  ViewBag.Title = "Shopping List Index";
 }
+
+<script type="text/javascript">
+
+  $(function () {
+    // Handle edited product information
+    $('#inCreate').click(function () {
+      var uid = $('#UserId').val();
+      var name = $('#ListName').val();
+      var List = {
+        'UserId': uid,
+        'ListName': name,
+      };
+
+      // Push edited JSON with ajax
+      $.ajax({
+        url: '/ShoppingList/Create/',
+        data: JSON.stringify(List),
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        success: function (msg) {
+          alert(msg);
+        }
+      });
+
+    });
+
+  });
+
+</script>
 
 <h2>Create List</h2>
 
- <div>
-     @using (Html.BeginForm())
-     {
-          @Html.AntiForgeryToken()
-          @Html.ValidationSummary(true)
+<div>
+  @using (Html.BeginForm())
+  {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
          
-       <fieldset>
-           <legend>Shopping List</legend>
-         <div class="editor-label">
-          @Html.LabelFor(c => c.ListName, "Shopping List Name")
-          @Html.EditorFor(c => c.ListName)
-        </div>
-         <div class="editor-label">
-          @Html.LabelFor(c => c.UserId, "User ID")
-          @Html.EditorFor(c => c.UserId)
-        </div>
-           <br />
-     <p>
-            <input type="submit" value="Create" />
-        </p>
-           </fieldset>
-     }
-     <div>
+    <fieldset>
+      <legend>Shopping List</legend>
+      <div class="editor-label">
+        @Html.LabelFor(c => c.ListName, "Shopping List Name")
+        @Html.EditorFor(c => c.ListName)
+      </div>
+      <div class="editor-label">
+        @Html.LabelFor(c => c.UserId, "User ID")
+        @Html.EditorFor(c => c.UserId)
+      </div>
+      <br />
+      <p>
+        <input id="inCreate" type="submit" value="Create" />
+      </p>
+    </fieldset>
+  }
+  <div>
     @Html.ActionLink("View Lists", "Display")
+  </div>
 </div>
-            </div>
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+  @Scripts.Render("~/bundles/jqueryval")
 }

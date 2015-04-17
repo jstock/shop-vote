@@ -25,17 +25,19 @@ namespace ShopVote.Controllers.Admin
         }
         // POST: /ShoppingList/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(ShoppingList model)
+        public JsonResult Create(ShoppingList List)
         {
-            
-                //db.ShoppingList.Add(model);
-              //  db.SaveChanges();
-                return HttpNotFound();
-            
+            db.ShoppingList.Add(List);
+            int result = db.SaveChanges();
 
-          //  return View();
+            if (result <= 0)
+            {
+              return Json("transaction error", JsonRequestBehavior.AllowGet);
+            }
+
+            return Json("created successfully", JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult Display(ShoppingList model)
         {
             if (ModelState.IsValid)
