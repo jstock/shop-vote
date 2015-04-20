@@ -1,60 +1,63 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>ShopVote.US - @ViewBag.Title</title>
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width" />
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/jquery")
-    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/dashboard.css")" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8" />
+  <title>ShopVote.US - @ViewBag.Title</title>
+  <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <meta name="viewport" content="width=device-width" />
+  @Styles.Render("~/Content/css")
+  @Scripts.Render("~/bundles/jquery")
+  <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+  <link href="@Url.Content("~/Content/dashboard.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">ShopVote Admin</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">TestUser</a></li>
-                    <li><a href="#">Log Off</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+  <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li class="@(ViewContext.RouteData.Values["Action"].Equals("index") || ViewContext.RouteData.Values["Action"].Equals("") ? "active" : "")"><a href="@Url.Action("index", "admin")">Overview</a></li>
-                <li class="@(ViewContext.RouteData.Values["Action"].Equals("category") ? "active" : "")"><a href="@Url.Action("category", "admin")">Categories</a></li>
-                <li class="@(ViewContext.RouteData.Values["Action"].Equals("products") ? "active" : "")"><a href="@Url.Action("products", "admin")">Products</a></li>
-                <li class="@(ViewContext.RouteData.Values["Action"].Equals("manufacturers") ? "active" : "")"><a href="@Url.Action("manufacturers", "admin")">Manufacturers</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li class="@(ViewContext.RouteData.Values["Action"].Equals("ManageUser") ? "active" : "")"><a href="@Url.Action("ManageUser", "Admin")">Users</a></li>
-                <li class="@(ViewContext.RouteData.Values["Action"].Equals("ManageAdmin") ? "active" : "")"><a href="@Url.Action("ManageAdmin", "Admin")">Admins</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li class="@(ViewContext.RouteData.Values["Action"].Equals("About") ? "active" : "")"><a href="@Url.Action("About", "Admin")">About Page</a></li>
-                <li class="@(ViewContext.RouteData.Values["Action"].Equals("Contact") ? "active" : "")"><a href="@Url.Action("Contact", "Admin")">Contact Page</a></li>
-                <li class="@(ViewContext.RouteData.Values["Action"].Equals("Setting") ? "active" : "")"><a href="@Url.Action("Setting", "Admin")">Settings</a></li>
-            </ul>
-        </div>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">ShopVote Admin</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">TestUser</a></li>
+          <li><a href="#">Log Off</a></li>
+        </ul>
+      </div>
     </div>
-</div>
-    @RenderBody()
-    @RenderSection("scripts", required: false)
-    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/docs.min.js")"></script>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="@(ViewContext.RouteData.Values["Action"].Equals("index") || ViewContext.RouteData.Values["Action"].Equals("") ? "active" : "")"><a href="@Url.Action("index", "admin")">Overview</a></li>
+          <li class="@(ViewContext.RouteData.Values["Action"].Equals("products") ? "active" : "")"><a href="@Url.Action("products", "admin")">Products</a></li>
+          <li class="@(ViewContext.RouteData.Values["Action"].Equals("manufacturers") ? "active" : "")"><a href="@Url.Action("manufacturers", "admin")">Manufacturers</a></li>
+        </ul>
+        <ul class="nav nav-sidebar">
+          <li class="@(ViewContext.RouteData.Values["Action"].Equals("category") ? "active" : "")"><a href="@Url.Action("category", "admin")">Categories</a></li>
+          <li class="@(ViewContext.RouteData.Values["Action"].Equals("filters") ? "active" : "")"><a href="@Url.Action("filters", "admin")">Filters</a></li>
+        </ul>
+        <ul class="nav nav-sidebar">
+          <li class="@(ViewContext.RouteData.Values["Action"].Equals("ManageUser") ? "active" : "")"><a href="@Url.Action("ManageUser", "Admin")">Users</a></li>
+          <li class="@(ViewContext.RouteData.Values["Action"].Equals("ManageAdmin") ? "active" : "")"><a href="@Url.Action("ManageAdmin", "Admin")">Admins</a></li>
+        </ul>
+        <ul class="nav nav-sidebar">
+          <li class="@(ViewContext.RouteData.Values["Action"].Equals("About") ? "active" : "")"><a href="@Url.Action("About", "Admin")">About Page</a></li>
+          <li class="@(ViewContext.RouteData.Values["Action"].Equals("Contact") ? "active" : "")"><a href="@Url.Action("Contact", "Admin")">Contact Page</a></li>
+          <li class="@(ViewContext.RouteData.Values["Action"].Equals("Setting") ? "active" : "")"><a href="@Url.Action("Setting", "Admin")">Settings</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  @RenderBody()
+  @RenderSection("scripts", required: false)
+  <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+  <script src="@Url.Content("~/Scripts/docs.min.js")"></script>
 </body>
 </html>

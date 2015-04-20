@@ -1,0 +1,176 @@
+﻿@model IEnumerable<ShopVote.Models.PMFilter>
+
+@{
+    ViewBag.Title = "Filters";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script type="text/javascript">
+
+  $(function () {
+
+    // Pre-load categories to populate edit dropdowns
+    var categories = [];
+    $.getJSON('/Admin/GetCategories/', function (result) {
+      var i = 0;
+      $(result).each(function () {
+        categories[i] = this;
+        i = i + 1;
+      });
+    });
+
+    // Pre-load manufacturers to populate edit dropdowns
+    var manufacturers = [];
+    $.getJSON('/Admin/GetManufacturers/', function (result) {
+      var i = 0;
+      $(result).each(function () {
+        manufacturers[i] = this;
+        i = i + 1;
+      });
+    });
+
+    // Pre-load products to populate edit dropdowns
+    var products = [];
+    $.getJSON('/Admin/GetProducts/', function (result) {
+      var i = 0;
+      $(result).each(function () {
+        products[i] = this;
+        i = i + 1;
+      });
+    });
+
+    // Populate dropdowns on edit click
+    $('.edit-filter').click(function () {
+      var filter = $(this).parents('tr:first');
+
+      // Categories
+      var cats = filter.find('#filterCategory');
+      var oc = filter.find('#lblCategory').text();
+      cats.empty();
+      var i = 0;
+      for (i = 0; i < categories.length; i = i + 1) {
+        var m = $(document.createElement('option'))
+                    .attr('value', categories[i].Id)
+                    .text(categories[i].Name);
+        if (categories[i].Name === oc) {
+          m.attr('selected', 'selected');
+        }
+        m.appendTo(cats);
+      }
+
+      // Manufacturers
+      var mans = filter.find('#filterManufacturer');
+      var om = filter.find('#lblManufacturer').text();
+      mans.empty();
+      var j = 0;
+      for (j = 0; j < manufacturers.length; j = j + 1) {
+        var m = $(document.createElement('option'))
+                    .attr('value', manufacturers[j].Id)
+                    .text(manufacturers[j].Name);
+        if (manufacturers[j].Name === om) {
+          m.attr('selected', 'selected');
+        }
+        m.appendTo(mans);
+      }
+
+      // Products
+      var prods = filter.find('#filterProduct');
+      var op = filter.find('#lblProduct').text();
+      prods.empty();
+      var k = 0;
+      for (k = 0; k < products.length; k = k + 1) {
+        var m = $(document.createElement('option'))
+                    .attr('value', products[k].Id)
+                    .text(products[k].Name);
+        if (products[k].Name === op) {
+          m.attr('selected', 'selected');
+        }
+        m.appendTo(prods);
+      }
+
+    });
+
+    // Logic for toggling display/edit css classes
+    $('.edit-mode').hide();
+    $('.edit-filter, .cancel-filter').click(function () {
+      var row = $(this).parents('tr:first');
+      row.find('.edit-mode, .display-mode').toggle();
+    });
+
+  });
+
+</script>
+
+<style>
+
+  tfoot > tr > td {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.2em;
+  }
+
+    tfoot > tr > td > a {
+      font-weight: normal;
+    }
+
+  select {
+    max-width: 200px;
+  }
+
+  input#filterValue.edit-mode {
+    max-width: 40px;
+  }
+
+</style>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">@ViewBag.Title</h1>
+
+    <div id="divFilters" class="table-responsive">
+      @{ var grid = new WebGrid(Model, rowsPerPage: 100); }
+      @grid.GetHtml(
+        tableStyle: "table table-striped",
+        mode: WebGridPagerModes.All,
+        columns: grid.Columns(
+          grid.Column("ID", 
+            format: @<text> 
+                      <span class="display-mode"> <label>@item.ID</label> </span>
+                      <span class="edit-mode"> <label id="ID">@item.ID</label> </span> 
+                    </text>
+          ),
+          grid.Column("Category",
+            format: @<text> 
+                      <span class="display-mode"> <label id="lblCategory">@item.Category.Name</label> </span>
+                      <select id="filterCategory" class="edit-mode"></select> 
+                    </text>
+          ),
+          grid.Column("Manufacturer",
+            format: @<text> 
+                      <span class="display-mode"> <label id="lblManufacturer">@item.Manufacturer.Name</label> </span>
+                      <select id="filterManufacturer" class="edit-mode"></select> 
+                    </text>
+          ),
+          grid.Column("Product",
+            format: @<text> 
+                      <span class="display-mode"> <label id="lblProduct">@item.Product.Name</label> </span>
+                      <select id="filterProduct" class="edit-mode"></select> 
+                    </text>
+          ),
+          grid.Column("Value",
+            format: @<text> 
+                      <span class="display-mode"> <label id="lblValue">@item.FilterValue</label> </span>
+                      <input type="text" id="filterValue" value="@item.FilterValue" class="edit-mode" /> 
+                    </text>
+          ),
+          grid.Column("Action",
+            format: @<text> 
+                      <button class="edit-filter display-mode">Edit</button>  
+                      <button class="delete-filter display-mode">Delete</button>
+                      <button class="save-filter edit-mode">Save</button>  
+                      <button class="cancel-filter edit-mode">Cancel</button>  
+                    </text>, canSort: false)
+          )
+        )
+
+    </div>
+</div>

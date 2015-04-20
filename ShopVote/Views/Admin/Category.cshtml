@@ -1,21 +1,47 @@
 ﻿@model IEnumerable<ShopVote.Models.FilterCategory>
+
 @{
-    ViewBag.Title = "Category";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    WebGrid grid = new WebGrid(Model);
+  ViewBag.Title = "Categories";
+  Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<H2> Categories </h2>
-<p>@Html.ActionLink("Create New","CategoryCreate")</p>
-@grid.GetHtml(columns: new []{
-    grid.Column("ID"),
-    grid.Column("Namw"),
-    grid.Column("",
-                    header: "Actions",
-                    format: @<Text>
-                                @Html.ActionLink("Edit","CategoryEdit", new{id=item.ID})|
-                                @Html.ActionLink("Detail","CategoryDetail", new{ id=item.ID})|
-                                @Html.ActionLink("Edit","CategoryDelete", new{ id=item.ID})
-                            </Text>
-               ) 
-})
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+  <h1 class="page-header">@ViewBag.Title</h1>
+  <div class="form-group">
+    <div class="">
+      <a href="@Url.Action("Create", "Product")" class="btn btn-primary" role="button" style="color:white;">Add New</a>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID
+          </th>
+          <th>Name
+          </th>
+          <th>Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        @foreach (var item in Model)
+        {
+          <tr>
+            <td>
+              @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+              @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+              @Html.ActionLink("Details", "Details", new { id = item.Id })
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

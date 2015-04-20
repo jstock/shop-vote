@@ -13,33 +13,34 @@ namespace ShopVote.Controllers.Admin
     {
         private ProductContext db = new ProductContext();
         private ManufacturersContext mb = new ManufacturersContext();
-        //private FilterCategoryContext ct = new FilerCategoryContext();
+        private FilterCategoriesContext ct = new FilterCategoriesContext();
+        private FiltersContext fc = new FiltersContext();
 
-        ////
-        //// GET: /Admin/
+        //
+        // GET: /Admin/
 
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
+        public ActionResult Index()
+        {
+          return View();
+        }
 
-        //public ActionResult Category()
-        //{
-        //    return View(ct.FilterCategories.ToList());
-        //}
+        public ActionResult Category()
+        {
+          return View(ct.FilterCategories.ToList());
+        }
 
-        ////
-        //// GET: /Category/Details/5
+        //
+        // GET: /Category/Details/5
 
-        //public ActionResult CategoryDetails(int id = 0)
-        //{
-        //    FilterCategory categ = ct.Filters.Find(id);
-        //    if (categ == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(categ);
-        //}
+        public ActionResult CategoryDetails(int id = 0)
+        {
+          FilterCategory categ = ct.FilterCategories.Find(id);
+          if (categ == null)
+          {
+            return HttpNotFound();
+          }
+          return View(categ);
+        }
 
         ////
         //// GET: /category/Create
@@ -125,8 +126,11 @@ namespace ShopVote.Controllers.Admin
         //    return RedirectToAction("Category");
         //}
 
-
-
+        public ActionResult Filters() 
+        {
+          var filters = fc.Filters.Where(f => f.Id > 0);
+          return View(filters.ToList());
+        }
 
         public ActionResult Products()
         {
@@ -136,7 +140,7 @@ namespace ShopVote.Controllers.Admin
 
         public ActionResult Manufacturers() 
         {
-            var manufacturers = db.Manufacturers.Where(m => m.Id > 0).OrderBy(m => m.Name);
+            var manufacturers = mb.Manufacturers.Where(m => m.Id > 0).OrderBy(m => m.Name);
             return View(manufacturers.ToList());
         }
 
@@ -178,6 +182,22 @@ namespace ShopVote.Controllers.Admin
 
         public JsonResult GetManufacturers() {
           return Json(db.Manufacturers.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        //
+        // GET: /Admin/GetCategories
+
+        public JsonResult GetCategories()
+        {
+          return Json(ct.FilterCategories.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        //
+        // GET: /Admin/GetManufacturers
+
+        public JsonResult GetProducts()
+        {
+          return Json(db.Products.ToList(), JsonRequestBehavior.AllowGet);
         }
 
         //
