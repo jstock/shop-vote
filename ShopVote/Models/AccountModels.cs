@@ -18,7 +18,7 @@ namespace ShopVote.Models
     public DbSet<UserProfile> UserProfiles { get; set; }
   }
 
-  [Table("UserProfile")]
+  [Table("UserProfiles")]
   public class UserProfile
   {
     [Key]
