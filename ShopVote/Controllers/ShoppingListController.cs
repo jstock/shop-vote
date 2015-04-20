@@ -21,7 +21,14 @@ namespace ShopVote.Controllers.Admin
 
         public ActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+               return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
         // POST: /ShoppingList/Create
         [HttpPost]
@@ -42,7 +49,7 @@ namespace ShopVote.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
-                var shoppingLists = db.ShoppingList.Where(p => p.ShoppingListId > 0);
+                var shoppingLists = db.ShoppingList.Where(p => p.UserId.Equals(User.Identity));
                 if (shoppingLists.ToList().Count > 0)
                 {
                     return View(shoppingLists.ToList());

@@ -28,5 +28,6 @@ namespace ShopVote.Controllers
 
       return View();
     }
+
   }
 }
