@@ -17,7 +17,11 @@
                       <span class="display-mode"> <label id="lblName">@item.ListName</label> </span>
                       
                     </text>
-          )
+          ),
+          grid.Column("",
+          format:@<text>
+         @Html.ActionLink("Delete", "Delete", new { id = item.ShoppingListID })
+</text>  )      
           
           )
-        )
+          )

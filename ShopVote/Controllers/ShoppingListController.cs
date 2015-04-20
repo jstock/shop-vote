@@ -34,6 +34,8 @@ namespace ShopVote.Controllers.Admin
         [HttpPost]
         public JsonResult Create(ShoppingList List)
         {
+            int id = WebSecurity.CurrentUserId;
+            List.UserId = id;
             db.ShoppingList.Add(List);
             int result = db.SaveChanges();
 
@@ -47,20 +49,30 @@ namespace ShopVote.Controllers.Admin
 
         public ActionResult Display(ShoppingList model)
         {
-            if (ModelState.IsValid)
+
+           int id = WebSecurity.CurrentUserId;
+            
+            if (ModelState.IsValid && model != null)
             {
-                var shoppingLists = db.ShoppingList.Where(p => p.UserId.Equals(User.Identity));
+                var shoppingLists = db.ShoppingList.Where(p => p.UserId == id);
                 if (shoppingLists.ToList().Count > 0)
                 {
                     return View(shoppingLists.ToList());
                 }
             }
-            return View();
+            return View(new List<ShoppingList>());
         }
         // GET: /ShoppingList/Create
         public ActionResult Create()
         {
             return HttpNotFound();
+        }
+        public ActionResult Delete(int id)
+        {
+            ShoppingList list = db.ShoppingList.Find(id);
+            db.ShoppingList.Remove(list);
+            db.SaveChanges();
+            return RedirectToAction("Display");
         }
 
     }
