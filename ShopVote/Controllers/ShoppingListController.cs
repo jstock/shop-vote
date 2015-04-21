@@ -16,6 +16,8 @@ namespace ShopVote.Controllers.Admin
     public class ShoppingListController : Controller
     {
         private ShoppingListContext db = new ShoppingListContext();
+        private ProductContext dp = new ProductContext();
+        
         //
         // GET: /ShoppingList/
 
@@ -73,6 +75,18 @@ namespace ShopVote.Controllers.Admin
             db.ShoppingList.Remove(list);
             db.SaveChanges();
             return RedirectToAction("Display");
+        }
+        public ActionResult ViewList(int id)
+        {
+            List<Product> output = new List<Product>();
+            var result = (from x in db.ShoppingListProducts where x.ShoppingListId == id select x  ).ToArray();
+            foreach (var thing in result)
+            {
+                var item = (from y in dp.Products where y.Id == thing.ProductId select y).ToList();
+                output.AddRange(item);
+            }
+            //var products = db.ShoppingListProducts.Where(p=> p.ShoppingListId == id);
+            return View(output);
         }
 
     }
