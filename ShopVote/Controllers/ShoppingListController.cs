@@ -38,10 +38,12 @@ namespace ShopVote.Controllers.Admin
         {
             int id = WebSecurity.CurrentUserId;
             List.UserId = id;
+            var duplicate = (from x in db.ShoppingList where x.ListName == List.ListName select x);
+           
             db.ShoppingList.Add(List);
             int result = db.SaveChanges();
 
-            if (result <= 0)
+            if (result <= 0 || duplicate !=null)
             {
                 return Json("transaction error", JsonRequestBehavior.AllowGet);
             }
@@ -78,6 +80,16 @@ namespace ShopVote.Controllers.Admin
         }
         public ActionResult ViewList(int id)
         {
+            var list = (from x in db.ShoppingList where x.ShoppingListId == id select x);
+            foreach (var thin in list)
+            {
+                if (thin.ShoppingListId == id)
+                {
+                    Session["listName"] = thin.ListName;
+                }
+            }
+
+
             List<Product> output = new List<Product>();
             var result = (from x in db.ShoppingListProducts where x.ShoppingListId == id select x).ToArray();
             foreach (var thing in result)
@@ -102,8 +114,18 @@ namespace ShopVote.Controllers.Admin
             element.ProductId = (int)Session["productId"];
             db.ShoppingListProducts.Add(element);
             db.SaveChanges();
+            Session.Remove("productId");
             return RedirectToAction("Index", "Products");
         }
+        public ActionResult DeleteItem(int productId, int listId)
+        {
+            ShoppingListProducts element = new ShoppingListProducts();
+            element.ProductId = productId;
+            element.ShoppingListId = listId;
+            db.ShoppingListProducts.Remove(element);
+            db.SaveChanges();
+            return Redirect("ViewList");
 
+        }
     }
 }
