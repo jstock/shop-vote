@@ -29,6 +29,12 @@
           format: @<text> 
                     <span class="display-mode"> <label id="lblDescription">@item.Description</label> </span>
                   </text>
+        ),
+        grid.Column("",
+          format: @<text> 
+               @Html.ActionLink("Add To List", "AddToList", new { id = item.Id})
+               
+                  </text>
         )
       )
     )

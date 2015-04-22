@@ -17,7 +17,7 @@ namespace ShopVote.Controllers.Admin
     {
         private ShoppingListContext db = new ShoppingListContext();
         private ProductContext dp = new ProductContext();
-        
+
         //
         // GET: /ShoppingList/
 
@@ -25,7 +25,7 @@ namespace ShopVote.Controllers.Admin
         {
             if (User.Identity.IsAuthenticated)
             {
-               return View();
+                return View();
             }
             else
             {
@@ -43,7 +43,7 @@ namespace ShopVote.Controllers.Admin
 
             if (result <= 0)
             {
-              return Json("transaction error", JsonRequestBehavior.AllowGet);
+                return Json("transaction error", JsonRequestBehavior.AllowGet);
             }
 
             return Json("created successfully", JsonRequestBehavior.AllowGet);
@@ -52,8 +52,8 @@ namespace ShopVote.Controllers.Admin
         public ActionResult Display(ShoppingList model)
         {
 
-           int id = WebSecurity.CurrentUserId;
-            
+            int id = WebSecurity.CurrentUserId;
+
             if (ModelState.IsValid && model != null)
             {
                 var shoppingLists = db.ShoppingList.Where(p => p.UserId == id);
@@ -79,7 +79,7 @@ namespace ShopVote.Controllers.Admin
         public ActionResult ViewList(int id)
         {
             List<Product> output = new List<Product>();
-            var result = (from x in db.ShoppingListProducts where x.ShoppingListId == id select x  ).ToArray();
+            var result = (from x in db.ShoppingListProducts where x.ShoppingListId == id select x).ToArray();
             foreach (var thing in result)
             {
                 var item = (from y in dp.Products where y.Id == thing.ProductId select y).ToList();
@@ -87,6 +87,22 @@ namespace ShopVote.Controllers.Admin
             }
             //var products = db.ShoppingListProducts.Where(p=> p.ShoppingListId == id);
             return View(output);
+        }
+
+        public ActionResult SelectList()
+        {
+            int id = WebSecurity.CurrentUserId;
+            var list = db.ShoppingList.Where(p => p.UserId == id);
+            return View(list);
+        }
+        public ActionResult Add(int id)
+        {
+            ShoppingListProducts element = new ShoppingListProducts();
+            element.ShoppingListId = id;
+            element.ProductId = (int)Session["productId"];
+            db.ShoppingListProducts.Add(element);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Products");
         }
 
     }
