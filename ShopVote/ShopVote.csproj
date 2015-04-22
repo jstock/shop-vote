@@ -208,6 +208,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\FeedbackModels.cs" />
     <Compile Include="Models\ShoppingListModel.cs" />
     <Compile Include="Models\FilterModels.cs" />
     <Compile Include="Models\FilterProfileModels.cs" />
@@ -385,7 +386,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>7767</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:19734/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
