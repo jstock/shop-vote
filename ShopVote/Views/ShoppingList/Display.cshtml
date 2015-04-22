@@ -6,19 +6,26 @@
 }
 
 
-<h2>Display</h2>
-    @foreach (var m in Model)
-    {
-         <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => m.ShoppingListId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => m.ListName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => m.shoppingList.ToString())
-                        </td>
-     
-                    </tr>
-    }
+<h2>Shopping Lists</h2>
+  @{ var grid = new WebGrid(Model, rowsPerPage: 50); }
+      @grid.GetHtml(
+        tableStyle: "table table-striped",
+        mode: WebGridPagerModes.All,
+        columns: grid.Columns(
+          grid.Column("Name",
+            format: @<text> 
+                      <span class="display-mode"> <label id="lblName">@item.ListName</label> </span>
+                      
+                    </text>
+          ),
+          grid.Column("",
+          format:@<text>
+         @Html.ActionLink("View", "ViewList", new { id = item.ShoppingListID })
+</text>  ) , 
+          grid.Column("",
+          format:@<text>
+         @Html.ActionLink("Delete", "Delete", new { id = item.ShoppingListID })
+</text>  )      
+          
+          )
+          )

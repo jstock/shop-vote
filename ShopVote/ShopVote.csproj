@@ -208,7 +208,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\FeedbackModels.cs" />
     <Compile Include="Models\ShoppingListModel.cs" />
     <Compile Include="Models\FilterModels.cs" />
     <Compile Include="Models\FilterProfileModels.cs" />
@@ -297,7 +296,9 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -363,6 +364,10 @@
     <Content Include="Views\ShoppingList\Index.cshtml" />
     <Content Include="Views\ShoppingList\Display.cshtml" />
     <Content Include="Views\Admin\Manufacturers.cshtml" />
+    <Content Include="Views\Admin\Filters.cshtml" />
+    <Content Include="Views\ShoppingList\ViewList.cshtml" />
+    <Content Include="Views\Products\AddToList.cshtml" />
+    <Content Include="Views\ShoppingList\SelectList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -386,7 +391,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>7767</DevelopmentServerPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:19734/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

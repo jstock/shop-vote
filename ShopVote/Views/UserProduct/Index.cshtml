@@ -6,36 +6,35 @@
 }
 
     <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Manufacturer
-                    </th>
-                    <th>Product Name
-                    </th>
-                    <th>Product Description
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modleItem => item.Name)
-                        </td>
-                        
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                           @Html.ActionLink("Details", "Details", new { id = item.Id })
-           
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+      @{ var grid = new WebGrid(Model, rowsPerPage: 50); }
+      @grid.GetHtml(
+        tableStyle: "table table-striped",
+        mode: WebGridPagerModes.All,
+        columns: grid.Columns(
+          grid.Column("ID", 
+            format: @<text> 
+                      <span class="display-mode"> <label>@item.ID</label> </span>
+                     
+                    </text>
+          ),
+          grid.Column("Manufacturer",
+            format: @<text> 
+                      <span class="display-mode"> <label id="lblManufacturer">@item.Manufacturer.Name</label> </span>
+                   
+                    </text>
+          ),
+          grid.Column("Name",
+            format: @<text> 
+                      <span class="display-mode"> <label id="lblName">@item.Name</label> </span>
+                      
+                    </text>
+          ),
+          grid.Column("Score",
+            format: @<text> 
+                      <span class="display-mode"> <label id="lblDescription">@item.Description</label> </span>
+                      
+                    </text>
+          ))
+        )
+       
     </div>

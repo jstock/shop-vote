@@ -1,23 +1,61 @@
-﻿@model ShopVote.Models.CreateModel
+﻿@model ShopVote.Models.ShoppingList
 @{
-    ViewBag.Title = "Shopping List Index";
+  ViewBag.Title = "Shopping List Index";
 }
 
-<h2>Index</h2>
+<script type="text/javascript">
 
- <div>
-     @using (Html.BeginForm()) {
+  $(function () {
+    // Handle edited product information
+    $('#inCreate').click(function () {
+      var uid = $('#UserId').val();
+      var name = $('#ListName').val();
+      var List = {
+        'UserId': uid,
+        'ListName': name,
+      };
+
+      // Push edited JSON with ajax
+      $.ajax({
+        url: '/ShoppingList/Create/',
+        data: JSON.stringify(List),
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        success: function (msg) {
+          alert(msg);
+        }
+      });
+
+    });
+
+  });
+
+</script>
+
+<h2>Create List</h2>
+
+<div>
+  @using (Html.BeginForm())
+  {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
          
-       
-         <div class="editor-label">
-          @Html.LabelFor(c => c.ListName, "Shopping List Id")
-          @Html.EditorFor(c=> c.ListName)
-        </div>
-     }
-     <p>
-            <input type="submit" value="Create" />
-        </p>
-     <div>
+    <fieldset>
+      <legend>Shopping List</legend>
+      <div class="editor-label">
+        @Html.LabelFor(c => c.ListName, "Shopping List Name")
+        @Html.EditorFor(c => c.ListName)
+      </div>
+      <br />
+      <p>
+        <input id="inCreate" type="submit" value="Create" />
+      </p>
+    </fieldset>
+  }
+  <div>
     @Html.ActionLink("View Lists", "Display")
+  </div>
 </div>
-            </div>
+@section Scripts {
+  @Scripts.Render("~/bundles/jqueryval")
+}

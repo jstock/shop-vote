@@ -16,26 +16,31 @@ namespace ShopVote.Models
         }
 
         public DbSet<ShoppingList> ShoppingList { get; set; }
+        public DbSet<ShoppingListProducts> ShoppingListProducts { get; set; }
     }
+
     [Table("ShoppingList")]
     public class ShoppingList
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int ShoppingListId { get; set; }
-
-        //[ForeignKey("UserProfile")]
+        
         public int UserId { get; set; }
-
         public string ListName { get; set; }
-        public List<Product> shoppingList { get; set; }
 
     }
-    public class CreateModel
+  
+
+    [Table("ShoppingListProducts")]
+    public class ShoppingListProducts
     {
-        [Required]
-        [Display(Name = "List Name")]
-        public string ListName { get; set; }
+        [Column(Order=0),Key]
+        public int ShoppingListId { get; set; }
+        [Column(Order = 1), Key]
+        public int ProductId { get; set; }
     }
+
+
 
 }

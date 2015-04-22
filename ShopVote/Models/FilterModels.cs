@@ -8,7 +8,7 @@ using System.Web;
 
 namespace ShopVote.Models
 {
-  public class FiltersContext : DbContext 
+  public class FiltersContext : DbContext
   {
     public FiltersContext()
       : base("DefaultConnection")
@@ -24,20 +24,20 @@ namespace ShopVote.Models
     [Key]
     [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
-    
+
     public virtual int CategoryID { get; set; }
     [ForeignKey("CategoryID")]
     public virtual FilterCategory Category { get; set; }
-    
+
     public virtual int ManufacturerID { get; set; }
     [ForeignKey("ManufacturerID")]
     public virtual Manufacturer Manufacturer { get; set; }
-    
+
     public virtual int? ProductID { get; set; }
     [ForeignKey("ProductID")]
     public virtual Product Product { get; set; }
 
-    public Object Value { get; set; }
+    public decimal FilterValue { get; set; }
   }
 
   public class FilterCategoriesContext : DbContext
