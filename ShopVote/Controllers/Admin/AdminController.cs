@@ -13,6 +13,7 @@ namespace ShopVote.Controllers.Admin
     {
         private ProductContext db = new ProductContext();
         private ManufacturersContext mb = new ManufacturersContext();
+        private FeedbackContext fb = new FeedbackContext();
         private FilterCategoriesContext ct = new FilterCategoriesContext();
         private FiltersContext fc = new FiltersContext();
 
@@ -21,7 +22,8 @@ namespace ShopVote.Controllers.Admin
 
         public ActionResult Index()
         {
-          return View();
+            var feedbacks = fb.Feedbacks.Where(f => f.Id >= 0);
+            return View(feedbacks.ToList());
         }
 
         public ActionResult Category()

@@ -1,7 +1,11 @@
+@model IEnumerable<ShopVote.Models.Feedback>
+
 @{
     ViewBag.Title = "Admin Page - Overview";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">@ViewBag.Title</h1>
@@ -35,70 +39,21 @@
                     <th>ID</th>
                     <th>Content</th>
                     <th>User</th>
-                    <th>Contact</th>
+                    <th>Email</th>
+                    <th>Phone</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1,001</td>
-                    <td>Hey guys, what's up!</td>
-                    <td>Boming</td>
-                    <td>zhang.2498@osu.edu</td>
-                </tr>
-                <tr>
-                    <td>1,002</td>
-                    <td>I like Apple!</td>
-                    <td>Boming</td>
-                    <td>zhang.2498@osu.edu</td>
-                </tr>
-                <tr>
-                    <td>1,003</td>
-                    <td>Some other feedback</td>
-                    <td>someone</td>
-                    <td>email</td>
-                </tr>
-                <tr>
-                    <td>1,004</td>
-                    <td>Some other feedback</td>
-                    <td>someone</td>
-                    <td>email</td>
-                </tr>
-                <tr>
-                    <td>1,005</td>
-                    <td>Some other feedback</td>
-                    <td>someone</td>
-                    <td>email</td>
-                </tr>
-                <tr>
-                    <td>1,006</td>
-                    <td>Some other feedback</td>
-                    <td>someone</td>
-                    <td>email</td>
-                </tr>
-                <tr>
-                    <td>1,007</td>
-                    <td>Some other feedback</td>
-                    <td>someone</td>
-                    <td>email</td>
-                </tr>
-                <tr>
-                    <td>1,008</td>
-                    <td>Some other feedback</td>
-                    <td>someone</td>
-                    <td>email</td>
-                </tr>
-                <tr>
-                    <td>1,009</td>
-                    <td>Some other feedback</td>
-                    <td>someone</td>
-                    <td>email</td>
-                </tr>
-                <tr>
-                    <td>1,010</td>
-                    <td>Some other feedback</td>
-                    <td>someone</td>
-                    <td>email</td>
-                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modleItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modleItem => item.Content)</td>
+                        <td>@Html.DisplayFor(modleItem => item.UserName)</td>
+                        <td>@Html.DisplayFor(modleItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modleItem => item.PhoneNumber)</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
