@@ -39,11 +39,11 @@ namespace ShopVote.Controllers.Admin
             int id = WebSecurity.CurrentUserId;
             List.UserId = id;
             var duplicate = (from x in db.ShoppingList where x.ListName == List.ListName select x);
-           
+
             db.ShoppingList.Add(List);
             int result = db.SaveChanges();
 
-            if (result <= 0 || duplicate !=null)
+            if (result <= 0 || duplicate != null)
             {
                 return Json("transaction error", JsonRequestBehavior.AllowGet);
             }
@@ -74,6 +74,12 @@ namespace ShopVote.Controllers.Admin
         public ActionResult Delete(int id)
         {
             ShoppingList list = db.ShoppingList.Find(id);
+            var elements = (from y in db.ShoppingListProducts where y.ShoppingListId == id select y);
+            foreach(var item in elements)
+            {
+                db.ShoppingListProducts.Remove(item);
+            }
+            
             db.ShoppingList.Remove(list);
             db.SaveChanges();
             return RedirectToAction("Display");
@@ -86,6 +92,7 @@ namespace ShopVote.Controllers.Admin
                 if (thin.ShoppingListId == id)
                 {
                     Session["listName"] = thin.ListName;
+                    Session["listId"] = thin.ShoppingListId;
                 }
             }
 
@@ -117,14 +124,17 @@ namespace ShopVote.Controllers.Admin
             Session.Remove("productId");
             return RedirectToAction("Index", "Products");
         }
-        public ActionResult DeleteItem(int productId, int listId)
+        public ActionResult DeleteItem(int? id, int? list)
         {
-            ShoppingListProducts element = new ShoppingListProducts();
-            element.ProductId = productId;
-            element.ShoppingListId = listId;
-            db.ShoppingListProducts.Remove(element);
-            db.SaveChanges();
-            return Redirect("ViewList");
+            
+            ShoppingListProducts product = db.ShoppingListProducts.Find(list, id);
+            if (product != null)
+            {
+                db.ShoppingListProducts.Remove(product);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("ViewList", new { id = list });
 
         }
     }
