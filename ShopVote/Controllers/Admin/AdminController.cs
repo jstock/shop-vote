@@ -9,145 +9,61 @@ using ShopVote.Models;
 
 namespace ShopVote.Controllers.Admin
 {
-    public class AdminController : Controller
-    {
-        private ProductContext db = new ProductContext();
-        private ManufacturersContext mb = new ManufacturersContext();
-        private FeedbackContext fb = new FeedbackContext();
-        private FilterCategoriesContext ct = new FilterCategoriesContext();
-        private FiltersContext fc = new FiltersContext();
+  public class AdminController : Controller
+  {
+    private ProductContext db = new ProductContext();
+    private ManufacturersContext mb = new ManufacturersContext();
+    private FeedbackContext fb = new FeedbackContext();
+    private FilterCategoriesContext ct = new FilterCategoriesContext();
+    private FiltersContext fc = new FiltersContext();
     private FilterProfilesContext fp = new FilterProfilesContext();
 
-        //
-        // GET: /Admin/
+    //
+    // GET: /Admin/
 
-        public ActionResult Index()
-        {
-            var feedbacks = fb.Feedbacks.Where(f => f.Id >= 0);
-            return View(feedbacks.ToList());
-        }
+    public ActionResult Index()
+    {
+      var feedbacks = fb.Feedbacks.Where(f => f.Id >= 0);
+      return View(feedbacks.ToList());
+    }
 
-        public ActionResult Category()
-        {
-          return View(ct.FilterCategories.ToList());
-        }
+    public ActionResult Category()
+    {
+      return View(ct.FilterCategories.ToList());
+    }
 
-        //
-        // GET: /Category/Details/5
+    //
+    // GET: /Category/Details/5
 
-        public ActionResult CategoryDetails(int id = 0)
-        {
-          FilterCategory categ = ct.FilterCategories.Find(id);
-          if (categ == null)
-          {
-            return HttpNotFound();
-          }
-          return View(categ);
-        }
+    public ActionResult CategoryDetails(int id = 0)
+    {
+      FilterCategory categ = ct.FilterCategories.Find(id);
+      if (categ == null)
+      {
+        return HttpNotFound();
+      }
+      return View(categ);
+    }
 
-        ////
-        //// GET: /category/Create
+    public ActionResult Filters()
+    {
+      var filters = fc.Filters.Where(f => f.Id > 0);
+      return View(filters.ToList());
+    }
 
-        //public ActionResult CategoryCreate()
-        //{
-        //    ViewBag.CategoryId = new SelectList(ct.FilterCategories, "Id", "Name");
-        //    return View();
-        //}
+    public ActionResult Products()
+    {
+      var products = db.Products.Include(p => p.Manufacturer);
+      return View(products.ToList());
+    }
 
-        ////
-        //// POST: /ProductFilter/Create
+    public ActionResult Manufacturers()
+    {
+      var manufacturers = mb.Manufacturers.Where(m => m.Id > 0).OrderBy(m => m.Name);
+      return View(manufacturers.ToList());
+    }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult CategoryCreate(FilterCategory categ)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        ct.FilterCategories.Add(categ);
-        //        ct.SaveChanges();
-        //        return RedirectToAction("Categ");
-        //    }
-
-        //    ViewBag.CategoryId = new SelectList(ct.FilterCategories, "Id", "Name", productfilter.CategoryId);
-        //    return View(productfilter);
-        //}
-
-        ////
-        //// GET: /cetagory/Edit/#
-
-        //public ActionResult CategoryEdit(int id = 0)
-        //{
-        //    FilterCategory categ = ct.FilterCategories.Find(id);
-        //    if (productfilter == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.CategoryId = new SelectList(ct.FilterCategories, "Id", "Name", productfilter.CategoryId);
-        //    return View(productfilter);
-        //}
-
-        ////
-        //// POST: /ProductFilter/Edit/5
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult CategoryEdit(Category categ)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        ct.Entry(categ).State = EntityState.Modified;
-        //        ct.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.CategoryId = new SelectList(db.FilterCategories, "Id", "Name", productfilter.CategoryId);
-        //    return View(categ);
-        //}
-
-        ////
-        //// GET: /category/Delete/5
-
-        //public ActionResult CategoryDelete(int id = 0)
-        //{
-        //    FilterCategory categ = ct.FilterCategories.Find(id);
-        //    if (categ == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(categ);
-        //}
-
-        ////
-        //// POST: /category/Delete/#
-
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult CategoryDeleteConfirmed(int id)
-        //{
-        //    FilterCategory categ = ct.FilterCategories.Find(id);
-        //    ct.FilterCategories.Remove(categ);
-        //    ct.SaveChanges();
-        //    return RedirectToAction("Category");
-        //}
-
-        public ActionResult Filters() 
-        {
-          var filters = fc.Filters.Where(f => f.Id > 0);
-          return View(filters.ToList());
-        }
-
-        public ActionResult Products()
-        {
-            var products = db.Products.Include(p => p.Manufacturer);
-            return View(products.ToList());
-        }
-
-        public ActionResult Manufacturers() 
-        {
-            var manufacturers = mb.Manufacturers.Where(m => m.Id > 0).OrderBy(m => m.Name);
-            return View(manufacturers.ToList());
-        }
-
-        //
+    //
     // GET: /Admin/GetManufacturers
 
     public JsonResult GetManufacturers()
@@ -205,7 +121,7 @@ namespace ShopVote.Controllers.Admin
     //
     // POST: /Admin/CreateFilter
 
-        [HttpPost]
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public ActionResult CreateFilter(PMFilter filter)
     {
@@ -217,7 +133,7 @@ namespace ShopVote.Controllers.Admin
       }
 
       return RedirectToAction("filters", "admin");
-          }
+    }
 
     //
     // POST: /Admin/EditFilter
@@ -229,7 +145,7 @@ namespace ShopVote.Controllers.Admin
       if (filter == null)
       {
         return Json("filter cannot be null", JsonRequestBehavior.AllowGet);
-          }
+      }
 
       var old = fc.Filters.Where(f => f.Id == filter.Id).FirstOrDefault();
       if (old == null)
@@ -252,8 +168,8 @@ namespace ShopVote.Controllers.Admin
       var man = mb.Manufacturers.Where(m => m.Id == filter.ManufacturerID).FirstOrDefault();
       if (man == null)
       {
-            return Json("manufacturer not found", JsonRequestBehavior.AllowGet);
-          }
+        return Json("manufacturer not found", JsonRequestBehavior.AllowGet);
+      }
 
       var prod = db.Products.Where(m => m.Id == filter.ProductID).FirstOrDefault();
       if (man == null)
@@ -270,13 +186,13 @@ namespace ShopVote.Controllers.Admin
       int result = fc.SaveChanges();
       if (result <= 0)
       {
-            return Json("transaction error", JsonRequestBehavior.AllowGet);
-          }
+        return Json("transaction error", JsonRequestBehavior.AllowGet);
+      }
 
-          return Json("edited successfully", JsonRequestBehavior.AllowGet);
-        }
+      return Json("edited successfully", JsonRequestBehavior.AllowGet);
+    }
 
-        //
+    //
     // POST: /Admin/DeleteFilter
 
     [HttpPost]
@@ -308,9 +224,9 @@ namespace ShopVote.Controllers.Admin
         return Json("transaction error", JsonRequestBehavior.AllowGet);
       }
 
-        }
+    }
 
-        //
+    //
     // POST: /Admin/EditProduct
 
     [HttpPost]
@@ -330,9 +246,9 @@ namespace ShopVote.Controllers.Admin
 
       var man = db.Manufacturers.Where(m => m.Id == product.ManufacturerID).FirstOrDefault();
       if (man == null)
-        {
+      {
         return Json("manufacturer not found", JsonRequestBehavior.AllowGet);
-        }
+      }
 
       old.Name = product.Name;
       old.ManufacturerID = product.ManufacturerID;
@@ -341,76 +257,76 @@ namespace ShopVote.Controllers.Admin
 
       int result = db.SaveChanges();
       if (result <= 0)
-        {
+      {
         return Json("transaction error", JsonRequestBehavior.AllowGet);
       }
 
       return Json("edited successfully", JsonRequestBehavior.AllowGet);
-        }
+    }
 
-        //
-        // POST: /Admin/DeleteProduct
+    //
+    // POST: /Admin/DeleteProduct
 
-        [HttpPost]
+    [HttpPost]
     public JsonResult DeleteProduct(string ID)
     {
-          
-          var productID = Convert.ToInt32(ID);
+
+      var productID = Convert.ToInt32(ID);
       if (productID <= 0)
       {
-            return Json("productID must be greater than 0", JsonRequestBehavior.AllowGet);
-          }
+        return Json("productID must be greater than 0", JsonRequestBehavior.AllowGet);
+      }
 
-          var prod = db.Products.Where(p => p.Id == productID).FirstOrDefault();
-          
+      var prod = db.Products.Where(p => p.Id == productID).FirstOrDefault();
+
       if (prod == null)
       {
-            return Json("product not found", JsonRequestBehavior.AllowGet);
-          }
+        return Json("product not found", JsonRequestBehavior.AllowGet);
+      }
 
       try
       {
 
-            db.Products.Remove(prod);
-            db.SaveChanges();
-            return Json("product deleted successfully", JsonRequestBehavior.AllowGet);
+        db.Products.Remove(prod);
+        db.SaveChanges();
+        return Json("product deleted successfully", JsonRequestBehavior.AllowGet);
 
       }
       catch (DataException)
       {
-            return Json("transaction error", JsonRequestBehavior.AllowGet);
-          }
+        return Json("transaction error", JsonRequestBehavior.AllowGet);
+      }
 
-        }
-
-        public ActionResult Company()
-        {
-            return View();
-        }
-
-        public ActionResult ManageUser()
-        {
-            return View();
-        }
-
-        public ActionResult ManageAdmin()
-        {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            return View();
-        }
-
-        public ActionResult Setting()
-        {
-            return View();
-        }
     }
+
+    public ActionResult Company()
+    {
+      return View();
+    }
+
+    public ActionResult ManageUser()
+    {
+      return View();
+    }
+
+    public ActionResult ManageAdmin()
+    {
+      return View();
+    }
+
+    public ActionResult About()
+    {
+      return View();
+    }
+
+    public ActionResult Contact()
+    {
+      return View();
+    }
+
+    public ActionResult Setting()
+    {
+      return View();
+    }
+  }
 }
