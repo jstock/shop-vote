@@ -365,6 +365,7 @@
     <Content Include="Views\ShoppingList\Display.cshtml" />
     <Content Include="Views\Admin\Manufacturers.cshtml" />
     <Content Include="Views\Admin\Filters.cshtml" />
+    <Content Include="Views\Admin\CreateFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

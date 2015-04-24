@@ -1,13 +1,18 @@
 ﻿@model IEnumerable<ShopVote.Models.PMFilter>
 
 @{
-    ViewBag.Title = "Filters";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+  ViewBag.Title = "Filters";
+  Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <script type="text/javascript">
 
   $(function () {
+
+    var cload = false;
+    var qload = false;
+    var mload = false;
+    var pload = false;
 
     // Pre-load categories to populate edit dropdowns
     var categories = [];
@@ -17,6 +22,18 @@
         categories[i] = this;
         i = i + 1;
       });
+      cload = true;
+    });
+
+    // Pre-load questions to populate edit dropdowns
+    var questions = [];
+    $.getJSON('/Admin/GetQuestions/', function (result) {
+      var i = 0;
+      $(result).each(function () {
+        questions[i] = this;
+        i = i + 1;
+      });
+      qload = true;
     });
 
     // Pre-load manufacturers to populate edit dropdowns
@@ -27,6 +44,7 @@
         manufacturers[i] = this;
         i = i + 1;
       });
+      mload = true;
     });
 
     // Pre-load products to populate edit dropdowns
@@ -37,6 +55,7 @@
         products[i] = this;
         i = i + 1;
       });
+      pload = true;
     });
 
     // Populate dropdowns on edit click
@@ -88,13 +107,91 @@
         m.appendTo(prods);
       }
 
+      // Questions
+      var qs = filter.find('#filterQuestion');
+      var oc = parseInt(filter.find('#lblQuestionID').text());
+      qs.empty();
+      var l = 0;
+      for (l = 0; l < questions.length; l = l + 1) {
+        var m = $(document.createElement('option'))
+                    .attr('value', questions[l].Id)
+                    .text(questions[l].Description);
+        if (questions[l].Id === oc) {
+          m.attr('selected', 'selected');
+        }
+        m.appendTo(qs);
+      }
+
     });
 
     // Logic for toggling display/edit css classes
     $('.edit-mode').hide();
     $('.edit-filter, .cancel-filter').click(function () {
       var row = $(this).parents('tr:first');
-      row.find('.edit-mode, .display-mode').toggle();
+      if (cload && qload && mload && pload) {
+        row.find('.edit-mode, .display-mode').toggle();
+      } else {
+        alert('please wait 5-10 seconds for products, manufacturers, questions, and categories to pre-load.');
+      }
+    });
+
+    // Handle edited filter information
+    $('.save-filter').click(function () {
+      var filter = $(this).parents('tr:first');
+      var id = parseInt(filter.find('#ID').text());
+      var manID = filter.find('#filterManufacturer').val();
+      var manufacturer = filter.find('#filterManufacturer option:selected').text();
+      var catID = filter.find('#filterCategory').val();
+      var category = filter.find('#filterCategory option:selected').text();
+      var questID = filter.find('#filterQuestion').val();
+      var prodID = filter.find('#filterProduct').val();
+      var product = filter.find('#filterProduct option:selected').text();
+      var value = filter.find('#filterValue').val();
+      filter.find('#lblCategory').text(category);
+      filter.find('#lblManufacturer').text(manufacturer);
+      filter.find('#lblQuestion').text(questID);
+      filter.find('#lblProduct').text(product);
+      filter.find('#lblValue').text(value);
+      var Filter = {
+        'Id': id,
+        'CategoryID': catID,
+        'ManufacturerID': manID,
+        'QuestionID': questID,
+        'ProductID': prodID,
+        'FilterValue': value
+      };
+
+      // Push edited JSON with ajax
+      $.ajax({
+        url: '/Admin/EditFilter/',
+        data: JSON.stringify(Filter),
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        success: function (msg) {
+          alert(msg);
+          window.location.href = '/admin/filters/';
+        }
+      });
+
+    });
+
+    // Handle filter deletion
+    $('.delete-filter').click(function () {
+      var filter = $(this).parents('tr:first');
+      var id = filter.find('#ID').text();
+      if (confirm('are you sure you want to delete this filter?')) {
+        var ID = { 'ID': id };
+        $.ajax({
+          url: '/Admin/DeleteFilter/',
+          data: JSON.stringify(ID),
+          type: 'POST',
+          contentType: 'application/json; charset=utf-8',
+          success: function (msg) {
+            alert(msg);
+            window.location.href = '/Admin/Filters/';
+          }
+        });
+      }
     });
 
   });
@@ -102,7 +199,6 @@
 </script>
 
 <style>
-
   tfoot > tr > td {
     text-align: center;
     font-weight: bolder;
@@ -114,63 +210,90 @@
     }
 
   select {
-    max-width: 200px;
+    max-width: 175px;
   }
 
   input#filterValue.edit-mode {
     max-width: 40px;
   }
-
 </style>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <h1 class="page-header">@ViewBag.Title</h1>
+  <h1 class="page-header">@ViewBag.Title</h1>
+  <div class="form-group">
+    <div class="">
+      <a href="@Url.Action("createfilter", "admin")" class="btn btn-primary" role="button" style="color:white;">Add New</a>
+    </div>
+  </div>
 
-    <div id="divFilters" class="table-responsive">
-      @{ var grid = new WebGrid(Model, rowsPerPage: 100); }
-      @grid.GetHtml(
+  <div id="divFilters" class="table-responsive">
+    @{ var grid = new WebGrid(Model, rowsPerPage: 100); }
+    @grid.GetHtml(
         tableStyle: "table table-striped",
         mode: WebGridPagerModes.All,
         columns: grid.Columns(
-          grid.Column("ID", 
-            format: @<text> 
-                      <span class="display-mode"> <label>@item.ID</label> </span>
-                      <span class="edit-mode"> <label id="ID">@item.ID</label> </span> 
-                    </text>
+          grid.Column("ID",
+            format: @<text>
+    <span class="display-mode">
+      <label>@item.ID</label>
+    </span>
+    <span class="edit-mode">
+      <label id="ID">@item.ID</label>
+    </span>
+    </text>
           ),
           grid.Column("Category",
-            format: @<text> 
-                      <span class="display-mode"> <label id="lblCategory">@item.Category.Name</label> </span>
-                      <select id="filterCategory" class="edit-mode"></select> 
-                    </text>
+            format: @<text>
+    <span class="display-mode">
+      <label id="lblCategory">@item.Category.Name</label>
+    </span>
+    <select id="filterCategory" class="edit-mode"></select>
+    </text>
+          ),
+          grid.Column("Question",
+            format: @<text>
+    <span class="display-mode">
+      <label id="lblQuestionID">@item.QuestionID</label>
+    </span>
+    <select id="filterQuestion" class="edit-mode"></select>
+    </text>
           ),
           grid.Column("Manufacturer",
-            format: @<text> 
-                      <span class="display-mode"> <label id="lblManufacturer">@item.Manufacturer.Name</label> </span>
-                      <select id="filterManufacturer" class="edit-mode"></select> 
-                    </text>
+            format: @<text>
+    <span class="display-mode">
+      <label id="lblManufacturer">@item.Manufacturer.Name</label>
+    </span>
+    <select id="filterManufacturer" class="edit-mode"></select>
+    </text>
           ),
           grid.Column("Product",
-            format: @<text> 
-                      <span class="display-mode"> <label id="lblProduct">@item.Product.Name</label> </span>
-                      <select id="filterProduct" class="edit-mode"></select> 
-                    </text>
+            format: @<text>
+    <span class="display-mode">
+      @if (item.ProductID > 0)
+      {
+        <label id="lblProduct">@item.Product.Name</label>
+      }
+    </span>
+    <select id="filterProduct" class="edit-mode"></select>
+    </text>
           ),
           grid.Column("Value",
-            format: @<text> 
-                      <span class="display-mode"> <label id="lblValue">@item.FilterValue</label> </span>
-                      <input type="text" id="filterValue" value="@item.FilterValue" class="edit-mode" /> 
-                    </text>
+            format: @<text>
+    <span class="display-mode">
+      <label id="lblValue">@item.FilterValue</label>
+    </span>
+    <input type="text" id="filterValue" value="@item.FilterValue" class="edit-mode" />
+    </text>
           ),
           grid.Column("Action",
-            format: @<text> 
-                      <button class="edit-filter display-mode">Edit</button>  
-                      <button class="delete-filter display-mode">Delete</button>
-                      <button class="save-filter edit-mode">Save</button>  
-                      <button class="cancel-filter edit-mode">Cancel</button>  
-                    </text>, canSort: false)
+            format: @<text>
+    <button class="edit-filter display-mode">Edit</button>
+    <button class="delete-filter display-mode">Delete</button>
+    <button class="save-filter edit-mode">Save</button>
+    <button class="cancel-filter edit-mode">Cancel</button>
+    </text>, canSort: false)
           )
         )
 
-    </div>
+  </div>
 </div>
