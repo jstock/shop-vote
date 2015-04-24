@@ -16,6 +16,7 @@ namespace ShopVote.Models
         }
 
         public DbSet<ShoppingList> ShoppingList { get; set; }
+        public DbSet<ShoppingListProducts> ShoppingListProducts { get; set; }
     }
 
     [Table("ShoppingList")]
@@ -24,6 +25,7 @@ namespace ShopVote.Models
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int ShoppingListId { get; set; }
+        
         public int UserId { get; set; }
         public string ListName { get; set; }
 
@@ -33,9 +35,9 @@ namespace ShopVote.Models
     [Table("ShoppingListProducts")]
     public class ShoppingListProducts
     {
-        [Key]
+        [Column(Order=0),Key]
         public int ShoppingListId { get; set; }
-        [Key]
+        [Column(Order = 1), Key]
         public int ProductId { get; set; }
     }
 

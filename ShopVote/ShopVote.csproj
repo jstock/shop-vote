@@ -208,6 +208,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\FeedbackModels.cs" />
     <Compile Include="Models\ShoppingListModel.cs" />
     <Compile Include="Models\FilterModels.cs" />
     <Compile Include="Models\FilterProfileModels.cs" />
@@ -365,7 +366,9 @@
     <Content Include="Views\ShoppingList\Display.cshtml" />
     <Content Include="Views\Admin\Manufacturers.cshtml" />
     <Content Include="Views\Admin\Filters.cshtml" />
-    <Content Include="Views\Admin\CreateFilter.cshtml" />
+    <Content Include="Views\ShoppingList\ViewList.cshtml" />
+    <Content Include="Views\Products\AddToList.cshtml" />
+    <Content Include="Views\ShoppingList\SelectList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

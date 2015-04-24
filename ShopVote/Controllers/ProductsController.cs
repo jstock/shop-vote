@@ -12,6 +12,7 @@ namespace ShopVote.Controllers.Admin
     public class ProductsController : Controller
     {
         private ProductContext db = new ProductContext();
+        private ShoppingListContext dl = new ShoppingListContext();
 
         //
         // GET: /Product/
@@ -128,6 +129,12 @@ namespace ShopVote.Controllers.Admin
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+       
+        public ActionResult AddToList( int id)
+        {
+            Session["productId"] = id;
+            return RedirectToAction("SelectList", "ShoppingList");
         }
     }
 }
