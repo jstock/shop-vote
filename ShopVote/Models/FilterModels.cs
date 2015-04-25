@@ -29,6 +29,10 @@ namespace ShopVote.Models
     [ForeignKey("CategoryID")]
     public virtual FilterCategory Category { get; set; }
 
+    public virtual int QuestionID { get; set; }
+    [ForeignKey("QuestionID")]
+    public virtual Question Question { get; set; }
+
     public virtual int ManufacturerID { get; set; }
     [ForeignKey("ManufacturerID")]
     public virtual Manufacturer Manufacturer { get; set; }
@@ -37,6 +41,7 @@ namespace ShopVote.Models
     [ForeignKey("ProductID")]
     public virtual Product Product { get; set; }
 
+    [Display(Name = "Value")]
     public decimal FilterValue { get; set; }
   }
 

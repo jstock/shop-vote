@@ -1,0 +1,65 @@
+﻿@model ShopVote.Models.PMFilter
+@{
+  ViewBag.Title = "Create Filter";
+  Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+
+  #divNewFilter > div {
+    margin: 16px 0;
+  }
+
+  #divNewFilter > div > select {
+    max-width: 350px;
+  }
+
+  #ddlCategory {
+    width: 350px;
+  }
+
+  #txtValue {
+    width: 100px;
+  }
+
+</style>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+@using (Html.BeginForm())
+{
+  @Html.AntiForgeryToken()
+  @Html.ValidationSummary()
+
+  <fieldset>
+    <legend>Registration Form</legend>
+    <div>
+      <div id="divNewFilter" style="display: inline-block;">
+        <div>
+          @Html.LabelFor(m => m.Category)
+          @Html.DropDownListFor(m => m.CategoryID, new SelectList(ViewBag.Categories, "Id", "Name"), new { id = "ddlCategory" })
+        </div>
+        <div>
+          @Html.LabelFor(m => m.Question)
+          @Html.DropDownListFor(m => m.QuestionID, new SelectList(ViewBag.Questions, "Id", "Description"))
+        </div>
+        <div>
+          @Html.LabelFor(m => m.Manufacturer)
+          @Html.DropDownListFor(m => m.ManufacturerID, new SelectList(ViewBag.Manufacturers, "Id", "Name"))
+        </div>
+        <div>
+          @Html.LabelFor(m => m.Product)
+          @Html.DropDownListFor(m => m.ProductID, new SelectList(ViewBag.Products, "Id", "Name"))
+        </div>
+        <div>
+          @Html.LabelFor(m => m.FilterValue)
+          @Html.TextBoxFor(m => m.FilterValue, new { id = "txtValue" })
+        </div>
+      </div>
+    </div>
+    <input type="submit" value="Create" />
+    @Html.ActionLink("Back", "filters", "admin")
+  </fieldset>
+}
+
+</div>
