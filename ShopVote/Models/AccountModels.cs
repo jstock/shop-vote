@@ -25,6 +25,11 @@ namespace ShopVote.Models
     [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
     public int UserId { get; set; }
     public string UserName { get; set; }
+
+    public bool IsInRole(string role) {
+      return System.Web.Security.Roles.IsUserInRole(role);
+    }
+
   }
 
   public class RegisterExternalLoginModel
