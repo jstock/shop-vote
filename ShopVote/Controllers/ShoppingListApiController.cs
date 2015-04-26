@@ -47,6 +47,19 @@ namespace ShopVote.Controllers
             return -1;
         }
 
+        public string PostProductToList(int productId, int listId)
+        {
+            ShoppingListProducts element = new ShoppingListProducts();
+            element.ShoppingListId = listId;
+            element.ProductId = productId;
+            db.ShoppingListProducts.Add(element);
+            db.SaveChanges();
+
+            var response = new HttpResponseMessage(HttpStatusCode.Created);
+            
+            return "success";
+        }
+
             
     }
 }
