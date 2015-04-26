@@ -84,6 +84,7 @@ namespace ShopVote.Controllers.Admin
             db.SaveChanges();
             return RedirectToAction("Display");
         }
+
         public ActionResult ViewList(int id)
         {
             var list = (from x in db.ShoppingList where x.ShoppingListId == id select x);

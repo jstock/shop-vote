@@ -8,9 +8,9 @@ using ShopVote.Models;
 
 namespace ShopVote.Controllers
 {
-    public class TestApiController : ApiController
+    public class MovieController : ApiController
     {
-        public Product getProduct(int id)
+        public Product GetProduct(int id)
         {
 
             // Return movie by id
