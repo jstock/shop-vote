@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ShopVote.Models.UserProfile>
+@{
+    ViewBag.Title = "Add Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script>
+
+  $(function () {
+
+    $('#btnAddAdmin').click(function () {
+      var uid = $('#newAdmin option:selected').val();
+      var name = $('#newAdmin option:selected').text();
+      var User = {
+        'UserId': uid,
+        'UserName': name
+      };
+
+      // Push edited JSON with ajax
+      $.ajax({
+        url: '/Admin/AddAdmin/',
+        data: JSON.stringify(User),
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        success: function (msg) {
+          alert(msg);
+          window.location.href = '/admin/manageadmin/';
+        }
+      });
+
+    });
+
+  });
+
+</script>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+  <h2>@ViewBag.Title</h2>
+    <fieldset>
+      <legend>Add Admin</legend>
+      <div style="margin-bottom: 16px;">
+        <div id="divNewAdmin" style="display: inline-block;">
+          @Html.DropDownList("newAdmin", new SelectList(Model, "UserId", "UserName"))
+        </div>
+      </div>
+      <button id="btnAddAdmin">Add</button>
+      @Html.ActionLink("back", "manageadmin", "admin")
+    </fieldset>
+
+  </div>
