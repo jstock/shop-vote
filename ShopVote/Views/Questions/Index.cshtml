@@ -1,20 +1,79 @@
 ﻿@model Tuple<List<ShopVote.Models.FilterCategory>, List<ShopVote.Models.Question>>
 
+<script type="text/javascript">
+
+  $(function () {
+    $('#btnSaveProfile').click(function () {
+
+      var categories = [];
+      var questions = [];
+      var values = [];
+      var i = 0;
+
+      $('input:radio:checked').each(function () {
+
+        // Add categoryID, questionID, and value for each
+        categories[i] = $(this).closest('div.questionCategory').attr('id');
+        questions[i] = $(this).attr('name');
+        values[i] = $(this).attr('value');
+        i = i + 1;
+
+      });
+
+      var FPValues = {
+        Categories: categories,
+        Questions: questions,
+        Values: values,
+        UserName: '@HttpContext.Current.User.Identity.Name'
+      };
+
+      FPValues = JSON.stringify({ 'values': FPValues });
+
+      // Push JSON with ajax
+      $.ajax({
+        url: '/Questions/SaveProfile/',
+        data: FPValues,
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        success: function (msg) {
+          alert(msg);
+        }
+      });
+
+    });
+  });
+
+</script>
+
+<style>
+  div > span {
+    font-size: 12px;
+    text-decoration: none;
+  }
+</style>
+
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-  <h1 class="page-header">@ViewBag.Title</h1>
   <div class="table-responsive">
     @foreach (var cat in Model.Item1)
     {
-      <div style="font-size: 22px; font-weight: bold; margin: 8px 0;">
+      <div id="@cat.Id" class="questionCategory" style="font-size: 22px; font-weight: bold; margin: 8px 0;">
         @Html.DisplayFor(modelItem => cat.Name)
         @foreach (var quest in Model.Item2.Where(q => q.CategoryID == cat.Id))
         {
-          <div style="font-size: 14px; font-weight: normal; margin: 8px 0 8px 16px;">
+          <div style="font-size: 14px; font-weight: normal; margin: 16px 0 0 16px;">
             @Html.DisplayFor(modelItem => quest.Description)
+          </div>
+          <div style="margin-left: 16px;">
+            <span>@(cat.Name == "Political Contribution" ? "Democratic" : "No")</span>@Html.RadioButton(quest.Id.ToString(), -10.0)
+            <span>@(cat.Name == "Political Contribution" ? "Independent" : "Maybe")</span>@Html.RadioButton(quest.Id.ToString(), 0.0)
+            <span>@(cat.Name == "Political Contribution" ? "Republican" : "Yes")</span>@Html.RadioButton(quest.Id.ToString(), 10.0)
           </div>
         }
       </div>
     }
+  </div>
+  <div style="text-align: center;">
+    <button id="btnSaveProfile" class="btn btn-primary">Save</button>
   </div>
 </div>
 

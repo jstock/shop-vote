@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using ShopVote.Models;
 namespace ShopVote.Controllers
 {
     public class ShoppingListApiController : ApiController
