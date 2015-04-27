@@ -38,9 +38,9 @@ namespace ShopVote.Controllers.Admin
     {
       int id = WebSecurity.CurrentUserId;
       List.UserId = id;
-      var duplicate = (from x in db.ShoppingList where x.ListName == List.ListName select x).FirstOrDefault();
-
-      if (duplicate != null)
+      var duplicate = (from x in db.ShoppingList where x.ListName == List.ListName  select x).FirstOrDefault();
+    
+      if (duplicate != null && duplicate.UserId == id)
       {
         return Json("shopping lists cannot be duplicated", JsonRequestBehavior.AllowGet);
       }
