@@ -14,6 +14,7 @@
       margin: 0 auto;
       position: fixed;
       box-shadow: 0 0 8px;
+      z-index: 1000;
     }
 
       .menu-bar > div {
@@ -86,6 +87,12 @@
           cursor: default;
           box-shadow: 2px 0 #808080;
         }
+
+        div.nav-menu > div.active {
+          background-color: #A2D7FF;
+        }
+      
+
   </style>
   <script type="text/javascript">
 
@@ -141,17 +148,20 @@
     @if (Request.IsAuthenticated)
     {
       <div class="nav-menu">
-        <div style="text-align: center; width: 100%; line-height: 40px; vertical-align: middle;"
+        <div class="@(ViewContext.RouteData.Values["Controller"].Equals("questions") ? "active" : "")"
+          style="text-align: center; width: 100%; line-height: 40px; vertical-align: middle;"
           onclick="javascript:document.location.href = /questions/;">
           Questions
         </div>
-        <div style="text-align: center; width: 100%; line-height: 40px; vertical-align: middle;"
+        <div class="@(ViewContext.RouteData.Values["Controller"].Equals("products") ? "active" : "")" 
+          style="text-align: center; width: 100%; line-height: 40px; vertical-align: middle;"
           onclick="javascript:document.location.href = /products/;">
           Products
         </div>
-           <div style="text-align: center; width: 100%; line-height: 40px; vertical-align: middle;"
-          onclick="javascript:document.location.href = /shoppinglist/;">
-          Shopping Lists
+           <div class="@(ViewContext.RouteData.Values["Controller"].Equals("shoppinglist") ? "active" : "")"
+             style="text-align: center; width: 100%; line-height: 40px; vertical-align: middle;"
+             onclick="javascript:document.location.href = /shoppinglist/;">
+             Shopping Lists
         </div>
       </div>
       <div style="margin-left: 190px; margin-right: 16px;">
