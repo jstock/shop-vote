@@ -8,6 +8,8 @@
 
   $(function () {
 
+    $('#searchText').focus();
+
     // Pull users question profile for coloring
     var profiles = [];
     var epeat_val = 0.0;
@@ -52,6 +54,11 @@
   tr.good {
     background-color: #BFF1BF;
   }
+
+  thead {
+    z-index: 5;
+  }
+  
 
 </style>
 

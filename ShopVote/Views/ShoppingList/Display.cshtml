@@ -15,17 +15,17 @@
           grid.Column("Name",
             format: @<text> 
                       <span class="display-mode"> <label id="lblName">@item.ListName</label> </span>
-                      
                     </text>
           ),
           grid.Column("",
           format:@<text>
-         @Html.ActionLink("View", "viewlist", new { id = item.ShoppingListID })
-</text>  ) , 
+                    @Html.ActionLink("View", "viewlist", new { id = item.ShoppingListID })
+                 </text>
+          ), 
           grid.Column("",
           format:@<text>
-         @Html.ActionLink("Delete", "Delete", new { id = item.ShoppingListID })
-</text>  )      
-          
-          )
-          )
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ShoppingListID })
+                 </text>
+          )     
+        )
+      )
