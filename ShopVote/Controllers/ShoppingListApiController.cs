@@ -64,8 +64,7 @@ namespace ShopVote.Controllers
             db.SaveChanges();
 
             var response = new HttpResponseMessage(HttpStatusCode.Created);
-            var relativePath = "/api/ShoppingListApi/" + productId;
-            response.Headers.Location = new Uri(Request.RequestUri, relativePath);
+            response.Content = new StringContent("You reached here");
             return response;
         }
         /*

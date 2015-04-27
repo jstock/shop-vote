@@ -7,6 +7,8 @@ using System.Web.Http;
 using ShopVote.Models;
 using System.Web.Mvc;
 using WebMatrix.WebData;
+using System.Data;
+using System.Data.Entity;
 
 namespace ShopVote.Controllers
 {
@@ -59,6 +61,23 @@ namespace ShopVote.Controllers
                 return WebSecurity.GetUserId(username);
             }
             return -1;
+        }
+
+        public string GetProductByName(string searchText)
+        {
+            string result = "";
+            var products = db.Products.Where(p => p.Id > 0).Include(p => p.Manufacturer);
+
+            if (!String.IsNullOrWhiteSpace(searchText))
+            {
+                products = products.Where(p => p.Name.Contains(searchText) || p.Description.Contains(searchText));
+            } 
+            foreach (var thing in products)
+            {
+                result = result + thing.Id + ",";
+            }
+
+            return result;
         }
     }
 }
