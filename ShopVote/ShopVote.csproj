@@ -223,6 +223,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dashboard.css" />
+    <Content Include="Content\Images\fb-share-button.png" />
+    <Content Include="Content\Images\logo_grav2.png" />
+    <Content Include="Content\Images\twitterbuttonbig.png" />
     <Content Include="Content\themes\base\images\accent.png" />
     <Content Include="Content\themes\base\images\bullet.png" />
     <Content Include="Content\themes\base\images\heroAccent.png" />
