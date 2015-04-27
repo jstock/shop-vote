@@ -120,8 +120,11 @@ namespace ShopVote.Controllers.Admin
             ShoppingListProducts element = new ShoppingListProducts();
             element.ShoppingListId = id;
             element.ProductId = (int)Session["productId"];
-            db.ShoppingListProducts.Add(element);
-            db.SaveChanges();
+            if (!db.ShoppingListProducts.Contains(element))
+            {
+                db.ShoppingListProducts.Add(element);
+                db.SaveChanges();
+            }
             Session.Remove("productId");
             return RedirectToAction("Index", "Products");
         }

@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "ViewList";
+}
+
+<h2>@Session["listName"]</h2>
+  @{ var grid = new WebGrid(Model, rowsPerPage: 50); }
+      @grid.GetHtml(
+        tableStyle: "table table-striped",
+        mode: WebGridPagerModes.All,
+        columns: grid.Columns(
+          grid.Column("",
+            format: @<text> 
+                      <span class="display-mode"> <label id="lblName">@item.Name</label> </span>
+                      
+                    </text>
+          ),
+          grid.Column("",
+          format: @<text>
+                @Html.ActionLink("Remove Item","DeleteItem", new {  id = (int)item.id, list =Session["listId"]})  
+
+                    </text>
+          )
+          )   
+          )

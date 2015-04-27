@@ -13,6 +13,14 @@ namespace ShopVote.Controllers
         private ShoppingListContext db = new ShoppingListContext();
         private UsersContext du = new UsersContext();
 
+        public string GetShoppingListById(int id)
+        {
+            string result = "";
+            var list = db.ShoppingList.Find(id);
+
+            return result+list.ListName;
+        }
+
         public string GetShoppingList(int userId)
         {
             string result = "";
@@ -47,6 +55,35 @@ namespace ShopVote.Controllers
             return -1;
         }
 
-            
+        public HttpResponseMessage PostProductToList(int productId, int listId)
+        {
+            ShoppingListProducts element = new ShoppingListProducts();
+            element.ShoppingListId = listId;
+            element.ProductId = productId;
+            db.ShoppingListProducts.Add(element);
+            db.SaveChanges();
+
+            var response = new HttpResponseMessage(HttpStatusCode.Created);
+            var relativePath = "/api/ShoppingListApi/" + productId;
+            response.Headers.Location = new Uri(Request.RequestUri, relativePath);
+            return response;
+        }
+        /*
+        public HttpResponseMessage DeleteProduct(int deleteProductId)
+        {
+            // Delete the movie from the database
+            ShoppingList list = db.ShoppingList.Find(deleteProductId);
+            var elements = (from y in db.ShoppingListProducts where y.ShoppingListId == deleteProductId select y);
+            foreach (var item in elements)
+            {
+                db.ShoppingListProducts.Remove(item);
+            }
+
+            db.ShoppingList.Remove(list);
+            db.SaveChanges();
+            // Return status code
+            return new HttpResponseMessage(HttpStatusCode.NoContent);
+        }
+        */
     }
 }

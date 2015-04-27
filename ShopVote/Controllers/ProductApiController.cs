@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using ShopVote.Models;
 using System.Web.Mvc;
+using WebMatrix.WebData;
 
 namespace ShopVote.Controllers
 {
@@ -49,6 +50,15 @@ namespace ShopVote.Controllers
                 entityTypes.Add(i);
             }
             return entityTypes;
+        }
+
+        public int GetUserByNameAndPassword(string username, string password)
+        {
+            if (WebSecurity.Login(username, password))
+            {
+                return WebSecurity.GetUserId(username);
+            }
+            return -1;
         }
     }
 }

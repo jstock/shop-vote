@@ -1,34 +1,39 @@
+@model IEnumerable<ShopVote.Models.UserProfile>
 @{
-    ViewBag.Title = "Admin";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+  ViewBag.Title = "Admin";
+  Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <h1 class="page-header">@ViewBag.Title</h1>
-
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Admin ID</th>
-                    <th>Name</th>
-                    <th>E-mail</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Boming Zhang</td>
-                    <td>zhang.2498@osu.edu</td>
-                </tr>
-            </tbody>
-        </table>
+  <h1 class="page-header">@ViewBag.Title</h1>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID
+          </th>
+          <th>Name
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var item in Model)
+        {
+          <tr>
+            <td>
+              @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+              @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2">
+      <a href="@Url.Action("addadmin", "admin")" class="btn btn-primary" role="button" style="color:white;">Add New</a>
     </div>
-
-    <div class="form-group">
-        <div class="col-sm-2">
-            <button type="submit" class="btn btn-primary">Add New</button>
-        </div>
-    </div>
-
+  </div>
 </div>

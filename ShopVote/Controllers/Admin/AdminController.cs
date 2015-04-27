@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MySql.Web.Security;
 using ShopVote.Models;
 
 namespace ShopVote.Controllers.Admin
@@ -17,6 +18,7 @@ namespace ShopVote.Controllers.Admin
     private FilterCategoriesContext ct = new FilterCategoriesContext();
     private FiltersContext fc = new FiltersContext();
     private FilterProfilesContext fp = new FilterProfilesContext();
+    private UsersContext uc = new UsersContext();
 
     //
     // GET: /Admin/
@@ -306,12 +308,32 @@ namespace ShopVote.Controllers.Admin
 
     public ActionResult ManageUser()
     {
-      return View();
+      return View(uc.UserProfiles.Where(a => a.UserId > 0).ToList());
     }
 
     public ActionResult ManageAdmin()
     {
-      return View();
+      var admins = uc.UserProfiles.Where(a => a.UserId > 0).ToList();
+      admins = admins.Where(a => a.IsInRole("Admin")).ToList();
+      return View(admins);
+    }
+
+    public ActionResult AddAdmin()
+    {
+      return View(uc.UserProfiles.Where(a => a.UserId > 0).ToList());
+    }
+
+    [HttpPost]
+    public JsonResult AddAdmin(UserProfile newAdmin)
+    {
+      UserProfile user = uc.UserProfiles.Where(u => u.UserId == newAdmin.UserId).FirstOrDefault();
+      if (user == null)
+      {
+        return Json("user not found", JsonRequestBehavior.AllowGet);
+      }
+      
+      // TODO: add user to admin role with MySqlRoleProvider
+      return Json("admin added successfully", JsonRequestBehavior.AllowGet);
     }
 
     public ActionResult About()
