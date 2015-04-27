@@ -36,7 +36,7 @@ namespace ShopVote.Models
     [ForeignKey("CategoryID")]
     public virtual FilterCategory Category { get; set; }
 
-    public Object Value { get; set; }
+    public decimal Value { get; set; }
 
   }
 

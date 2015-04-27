@@ -35,7 +35,7 @@ namespace ShopVote.Controllers
           entry.UserID = uid;
           entry.CategoryID = int.Parse(values.Categories[i]);
           entry.QuestionID = int.Parse(values.Questions[i]);
-          entry.Value = float.Parse(values.Values[i]);
+          entry.Value = decimal.Parse(values.Values[i]);
           fp.FilterProfiles.Add(entry);
       }
 
