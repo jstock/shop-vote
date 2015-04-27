@@ -143,7 +143,7 @@ namespace ShopVote.Controllers.Admin
             base.Dispose(disposing);
         }
        
-        public ActionResult AddToList( int id)
+        public ActionResult AddToList(int id)
         {
             Session["productId"] = id;
             return RedirectToAction("SelectList", "ShoppingList");
