@@ -13,6 +13,14 @@ namespace ShopVote.Controllers
         private ShoppingListContext db = new ShoppingListContext();
         private UsersContext du = new UsersContext();
 
+        public string GetShoppingListById(int id)
+        {
+            string result = "";
+            var list = db.ShoppingList.Find(id);
+
+            return result+list.ListName;
+        }
+
         public string GetShoppingList(int userId)
         {
             string result = "";
