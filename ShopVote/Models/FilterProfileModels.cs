@@ -28,16 +28,23 @@ namespace ShopVote.Models
     [ForeignKey("UserID")]
     public virtual UserProfile User { get; set; }
 
-    public virtual int FilterID { get; set; }
-    [ForeignKey("FilterID")]
-    public virtual PMFilter Filter { get; set; }
+    public virtual int QuestionID { get; set; }
+    [ForeignKey("QuestionID")]
+    public virtual Question Question { get; set; }
 
     public virtual int CategoryID { get; set; }
     [ForeignKey("CategoryID")]
     public virtual FilterCategory Category { get; set; }
 
-    public Object Value { get; set; }
+    public decimal Value { get; set; }
 
+  }
+
+  public class FPValues
+  {
+    public string[] Categories { get; set; }
+    public string[] Questions { get; set; }
+    public string[] Values { get; set; }
   }
 
   [Table("Questions")]

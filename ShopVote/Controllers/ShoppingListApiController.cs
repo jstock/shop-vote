@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using ShopVote.Models;
 namespace ShopVote.Controllers
 {
     public class ShoppingListApiController : ApiController
@@ -64,8 +63,7 @@ namespace ShopVote.Controllers
             db.SaveChanges();
 
             var response = new HttpResponseMessage(HttpStatusCode.Created);
-            var relativePath = "/api/ShoppingListApi/" + productId;
-            response.Headers.Location = new Uri(Request.RequestUri, relativePath);
+            response.Content = new StringContent("You reached here");
             return response;
         }
         /*

@@ -7,12 +7,28 @@ using System.Web;
 using System.Web.Mvc;
 using ShopVote.Models;
 
+
+
+
+
 namespace ShopVote.Controllers.Admin
 {
     public class ProductsController : Controller
     {
         private ProductContext db = new ProductContext();
         private ShoppingListContext dl = new ShoppingListContext();
+        private FilterProfilesContext fpc = new FilterProfilesContext();
+        private UsersContext uc = new UsersContext();
+
+        //
+        // GET: /Products/GetProfile
+
+        public JsonResult GetProfile()
+        {
+          var usr = uc.UserProfiles.Where(p => p.UserName == User.Identity.Name).FirstOrDefault();
+          var profile = fpc.FilterProfiles.Where(fp => fp.UserID == usr.UserId);
+          return Json(profile.ToList(), JsonRequestBehavior.AllowGet);
+        }
 
         //
         // GET: /Product/
@@ -131,7 +147,7 @@ namespace ShopVote.Controllers.Admin
             base.Dispose(disposing);
         }
        
-        public ActionResult AddToList( int id)
+        public ActionResult AddToList(int id)
         {
             Session["productId"] = id;
             return RedirectToAction("SelectList", "ShoppingList");

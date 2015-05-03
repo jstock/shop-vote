@@ -1,40 +1,99 @@
-﻿@model IEnumerable<ShopVote.Models.Product> 
+﻿@model IEnumerable<ShopVote.Models.Product>
 @{ 
   ViewBag.Title = "Products";
   Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-  @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+<script type="text/javascript">
+
+  $(function () {
+
+    $('#searchText').focus();
+
+    // Pull users question profile for coloring
+    var profiles = [];
+    var epeat_val = 0.0;
+    // Load up filter profile entries then color the rows individually
+    $.getJSON('/Products/GetProfile/', function (result) {
+      var i = 0;
+      $(result).each(function () {
+        profiles[i] = this;
+        if (profiles[i].CategoryID == 2 && profiles[i].QuestionID == 4) {
+          epeat_val = parseFloat(profiles[i].Value);
+        }
+        i = i + 1;
+      });
+
+      $("table tbody tr").each(function () {
+        var prod_val = parseFloat($(this).find('#lblDescription').text());
+        if (Math.abs(prod_val - epeat_val) <= 1.0) { $(this).addClass('good') }
+        else if (Math.abs(prod_val - epeat_val) <= 10.0) { $(this).addClass('neutral') }
+        else { $(this).addClass('bad') }
+      });
+
+    });
+
+  });
+
+</script>
+
+<style>
+
+  tfoot {
+    text-align: center;
+  }
+
+  tr.bad {
+    background-color: #FE5842;
+  }
+
+  tr.neutral {
+    background-color: #F7E030;
+  }
+
+  tr.good {
+    background-color: #BFF1BF;
+  }
+
+</style>
+
+@using (Html.BeginForm("Index", "Products", FormMethod.Get))
   {
-    <div>
-      Name/Description: @Html.TextBox("searchText")
-      <input type="submit" value="Search" />
-    </div>
+  <div>
+    Name/Description: @Html.TextBox("searchText")
+    <input type="submit" value="Search" />
+  </div>
     var grid = new WebGrid(Model, rowsPerPage: 100);
-    @grid.GetHtml(
+  @grid.GetHtml(
       tableStyle: "table table-striped",
       mode: WebGridPagerModes.All,
       columns: grid.Columns(
         grid.Column("Manufacturer",
-          format: @<text> 
-                    <span class="display-mode"> <label id="lblManufacturer">@item.Manufacturer.Name</label> </span>
-                  </text>
+          format: @<text>
+  <span id="@item.ManufacturerID" class="display-mode">
+    <label id="lblManufacturer">@item.Manufacturer.Name</label>
+  </span>
+  </text>
         ),
         grid.Column("Name",
-          format: @<text> 
-                    <span class="display-mode"> <label id="lblName">@item.Name</label> </span>
-                  </text>
+          format: @<text>
+  <span id="@item.ID" class="display-mode">
+    <label id="lblName">@item.Name</label>
+  </span>
+  </text>
         ),
         grid.Column("Description",
-          format: @<text> 
-                    <span class="display-mode"> <label id="lblDescription">@item.Description</label> </span>
-                  </text>
+          format: @<text>
+  <span id="@item.Description" class="display-mode">
+    <label id="lblDescription">@item.Description</label>
+  </span>
+  </text>
         ),
         grid.Column("",
-          format: @<text> 
-               @Html.ActionLink("Add To List", "AddToList", new { id = item.Id})
-               
-                  </text>
+          format: @<text>
+  @Html.ActionLink("Add To List", "AddToList", new { id = item.Id})
+
+  </text>
         )
       )
     )
